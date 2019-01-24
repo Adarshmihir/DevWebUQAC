@@ -16,25 +16,33 @@ public class HTTP_Client {
 		// TODO Auto-generated method stub
 		try {
 			Socket sendSocket = new Socket(InetAddress.getByName("google.ca"), 80);
-			System.out.println("Connecté au serveur ! GG");
 			
 			PrintWriter out = new PrintWriter(
 			          new BufferedWriter(
 			            new OutputStreamWriter(
 			              sendSocket.getOutputStream())),true);
 			
-			out.println("GET / HTTP/1.1\r\n");
-			out.println("Referer: google.ca\r\n");
+			out.println("GET / HTTP/1.0\r\n");
+			out.println("Host: google.ca\r\n");
 			out.println("\r\n");
-			out.flush();
 			
+			PrintWriter htmlFile = new PrintWriter("index.html", "UTF-8");
+			System.out.println("Fichier créé !");
+			
+			//out.flush() to check ????
 					
 			BufferedReader in = new BufferedReader(new InputStreamReader(sendSocket.getInputStream()));
 			String response;
 			
 			while((response = in.readLine()) != null)
-				System.out.println(response);
+			{
+				htmlFile.println(response);
+			}
+				
 			
+			System.out.println("Fichier édité !");
+			
+			htmlFile.close();
 			sendSocket.close();
 			
 		} catch (UnknownHostException e) {
