@@ -26,7 +26,7 @@ public class HTTP_Client {
 			out.println("Host: google.ca\r\n");
 			out.println("\r\n");
 			
-			PrintWriter htmlFile = new PrintWriter("index.html", "UTF-8");
+			PrintWriter htmlFile = new PrintWriter("dump.html", "UTF-8");
 			System.out.println("Fichier créé !");
 			
 			//out.flush() to check ????
