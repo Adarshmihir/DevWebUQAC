@@ -22,10 +22,10 @@ public class HTTP_Server implements Runnable{
 	static final String FILE_NOT_FOUND = "404.html";
 	static final String METHOD_NOT_SUPPORTED = "not_supported.html";
 	
-	//port to listen connection
+	//Port to listen connection
 	static final int PORT = 80;
 	
-	//verbose mode
+	//Verbose mode
 	static final boolean verbose = true;
 	
 	//Client Connection via Socket Class
@@ -37,20 +37,19 @@ public class HTTP_Server implements Runnable{
 	
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		try {
 			ServerSocket serverConnect = new ServerSocket(PORT);
 			System.out.println("Server started. \nListening for connections on port : " + PORT + " ...\n");
 			
-			//We listen until usel halts server execution
+			//We listen until user halts server execution
 			while(true) {
 				HTTP_Server myServer = new HTTP_Server(serverConnect.accept());
 				
 				if(verbose) {
-					System.out.println("Connection opened. (" + new Date() + ")");
+					System.out.println("Connection opened @ " + new Date());
 				}
 				
-				//create dedicated thread to manage client connection
+				//Create dedicated thread to manage client connection
 				Thread thread = new Thread(myServer);
 				thread.start();
 			}
@@ -62,47 +61,55 @@ public class HTTP_Server implements Runnable{
 
 	@Override
 	public void run() {
-		//we manage our particular client connection
-		BufferedReader in = null; PrintWriter out = null; BufferedOutputStream dataOut = null;
+		//We manage our particular client connection
+		BufferedReader in = null;
+		PrintWriter out = null;
+		BufferedOutputStream dataOut = null;
 		String fileRequested = null;
+		String method = null;
 		
 		try {
-			//we read characters from the client via the input stream on the socket
+			//We read characters from the client via the input stream on the socket
 			in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
-			//we get character output stream to client (for headers)
+			
+			//We get character output stream to client (for headers)
 			out = new PrintWriter(connect.getOutputStream());
-			//get binary output stream to client (for request)
+			
+			//Get binary output stream to client (for request)
 			dataOut = new BufferedOutputStream(connect.getOutputStream());
 			
-			//Get first line of the request from the client
-			String input = in.readLine();
-			//we parse the request with a string tokenizer
-			StringTokenizer parse = new StringTokenizer(input);
-			String method = parse.nextToken().toUpperCase(); //we get the HTTP method of the client
-			//we get file requested
-			fileRequested = parse.nextToken().toLowerCase();
+			//Get first line of the request from the client and split it in several tokens in an array of strings
+			String[] input = in.readLine().split("\\s");
 			
-			//we support only GET and HEAD methods, we check
+			//We get the HTTP method of the client
+			method = input[0];
+			System.out.println("Method : " + method + ".");
+			
+			//We get file requested
+			fileRequested = input[1];
+			System.out.println("File requested : " + input[1]);
+			
+			//We support only GET and HEAD methods, we check
 			if(!method.equals("GET") && !method.equals("HEAD")) {
-				if (verbose) {
+				if (verbose)
 					System.out.println("501 Not Implemented : " + method + " method.");
-				}
 				
-				//we return the not supported file to the client
+				//We return the not supported file to the client
 				File file = new File(WEB_ROOT, METHOD_NOT_SUPPORTED);
 				int fileLength = (int) file.length();
 				String contentMimeType = "text/html";
 				byte[] fileData = readFileData(file, fileLength);
 				
-				//we send HTTP Headers with data to client
+				//We send HTTP Headers with data to client
 				out.println("HTTP/1.1 501 Not Implemented");
-				out.println("Server: Java HTTP Server from GOYON Airy : 1.0");
+				out.println("Server: Java HTTP Server from AJEDDIG Faris & GOYON Airy : 1.0");
 				out.println("Date: " + new Date());
 				out.println("Content-type: " + contentMimeType);
 				out.println("Content-length: " + fileLength);
-				out.println(); //blank line between headers and content, very important !
+				out.println(); //requested blank line between headers and content
 				out.flush(); //flush character output stream buffer
-				//file
+				
+				//File
 				dataOut.write(fileData, 0, fileLength);
 				dataOut.flush();
 				
@@ -118,14 +125,14 @@ public class HTTP_Server implements Runnable{
 				if(method.equals("GET")) { //GET method so we return content
 					byte[] fileData = readFileData(file, fileLength);
 					
-					//send HTTP Headers
+					//Send HTTP Headers
 					out.println("HTTP/1.1 200 OK");
 					out.println("Server: Java HTTP Server from GOYON Airy : 1.0");
 					out.println("Date: " + new Date());
 					out.println("Content-type: " + content);
 					out.println("Content-length: " + fileLength);
-					out.println(); //blank line between headers and content, very important !
-					out.flush(); //flush character output stream buffer
+					out.println(); //Blank line between headers and content, very important !
+					out.flush(); //Flush character output stream buffer
 					
 					dataOut.write(fileData, 0, fileLength);
 					dataOut.flush();
@@ -147,10 +154,10 @@ public class HTTP_Server implements Runnable{
 			System.err.println("Server error : " + ioe);
 		} finally {
 			try {
-				in.close(); //close character input stream
+				in.close(); //Close character input stream
 				out.close();
 				dataOut.close();
-				connect.close(); //we close socket connection
+				connect.close(); //We close socket connection
 			} catch (Exception e) {
 				System.err.println("Error closing stream : " + e.getMessage());
 			}
@@ -167,15 +174,13 @@ public class HTTP_Server implements Runnable{
 			fileIn = new FileInputStream(file);
 			fileIn.read(fileData);
 		} finally {
-			// TODO Auto-generated catch block
 			if (fileIn != null)
 				fileIn.close();
 		}
-		
 		return fileData;		
 	}
 	
-	//return supported MIME Types
+	//Return supported MIME Types
 	private String getContentType(String fileRequested) {
 		if(fileRequested.endsWith(".htm") || fileRequested.endsWith(".html"))
 				return "text/html";
@@ -194,15 +199,13 @@ public class HTTP_Server implements Runnable{
 		out.println("Date: " + new Date());
 		out.println("Content-type: " + content);
 		out.println("Content-length: " + fileLength);
-		out.println(); //blank line between headers and content, very important !
-		out.flush(); //flush character output stream buffer
+		out.println(); //Blank line between headers and content, very important !
+		out.flush(); //Flush character output stream buffer
 		
 		dataOut.write(fileData, 0, fileLength);
 		dataOut.flush();
 		
-		if (verbose) {
+		if (verbose)
 			System.out.println("File " + fileRequested + " not found.");
-		}
 	}
-
 }
