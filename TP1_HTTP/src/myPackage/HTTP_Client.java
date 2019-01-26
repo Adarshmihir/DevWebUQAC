@@ -14,8 +14,9 @@ public class HTTP_Client {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String URL = "qc.yahoo.com";
 		try {
-			Socket sendSocket = new Socket(InetAddress.getByName("google.ca"), 80);
+			Socket sendSocket = new Socket(InetAddress.getByName(URL), 80);
 			
 			PrintWriter out = new PrintWriter(
 			          new BufferedWriter(
@@ -23,11 +24,11 @@ public class HTTP_Client {
 			              sendSocket.getOutputStream())),true);
 			
 			out.println("GET / HTTP/1.0\r\n");
-			out.println("Host: google.ca\r\n");
+			out.println("Host: " + URL + "\r\n");
 			out.println("\r\n");
 			
 			PrintWriter htmlFile = new PrintWriter("dump.html", "UTF-8");
-			System.out.println("Fichier créé !");
+			System.out.println("Fichier crÃ©Ã© !");
 			
 			//out.flush() to check ????
 					
@@ -40,7 +41,7 @@ public class HTTP_Client {
 			}
 				
 			
-			System.out.println("Fichier édité !");
+			System.out.println("Fichier Ã©ditÃ© !");
 			
 			htmlFile.close();
 			sendSocket.close();
