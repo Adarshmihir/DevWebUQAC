@@ -23,7 +23,7 @@ public class HTTP_Server implements Runnable{
 	static final String METHOD_NOT_SUPPORTED = "not_supported.html";
 	
 	//Port to listen connection
-	static final int PORT = 80;
+	static final int PORT = 8080;
 	
 	//Verbose mode
 	static final boolean verbose = true;
@@ -187,7 +187,7 @@ public class HTTP_Server implements Runnable{
 		else
 			return "text/plain";
 	}
-	
+
 	private void fileNotFound(PrintWriter out, OutputStream dataOut, String fileRequested) throws IOException {
 		File file = new File(WEB_ROOT, FILE_NOT_FOUND);
 		int fileLength = (int) file.length();

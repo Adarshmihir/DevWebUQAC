@@ -9,12 +9,15 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
+import java.util.Scanner;
 public class HTTP_Client {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String URL = "qc.yahoo.com";
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez l'URL que vous souhaitez récupérer :");
+		String URL = sc.nextLine();
+//		String URL = "qc.yahoo.com";
 		try {
 			Socket sendSocket = new Socket(InetAddress.getByName(URL), 80);
 			
