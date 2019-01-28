@@ -24,7 +24,7 @@ public class HTTP_Client {
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez entrer l'URL que vous souhaitez récupérer :");
+		System.out.println("Veuillez entrer l'URL que vous souhaitez rÃ©cupÃ©rer :");
 		String URL = sc.nextLine();
 		
 		try {
@@ -41,7 +41,7 @@ public class HTTP_Client {
 			out.println("\r\n");
 			
 			PrintWriter htmlFile = new PrintWriter("dump.html", "UTF-8");
-			System.out.println("Fichier créé !");
+			System.out.println("Fichier crÃ©Ã© !");
 					
 			BufferedReader in = new BufferedReader(new InputStreamReader(sendSocket.getInputStream()));
 			String response;
@@ -56,27 +56,27 @@ public class HTTP_Client {
 					break;
 					
 				case "400":
-					System.out.println("Erreur 400 - Requête incorrecte");
+					System.out.println("Erreur 400 - RequÃªte incorrecte");
 					closeStreams(htmlFile, sendSocket);
 				return;
 				
 				case "401":
-					System.out.println("Erreur 401 - La page à laquelle vous essayez d'accéder est protegee par le serveur");
+					System.out.println("Erreur 401 - La page Ã  laquelle vous essayez d'accÃ©der est protegee par le serveur");
 					closeStreams(htmlFile, sendSocket);
 				return;
 				
 				case "403":
-					System.out.println("Erreur 403 - L'acces à la page vous est interdit");
+					System.out.println("Erreur 403 - L'acces Ã  la page vous est interdit");
 					closeStreams(htmlFile, sendSocket);
 				return;
 				
 				case "404":
-					System.out.println("Erreur 404 - Le fichier que vous avez demandée est introuvable");
+					System.out.println("Erreur 404 - Le fichier que vous avez demandÃ© est introuvable");
 					closeStreams(htmlFile, sendSocket);
 				return;
 				
 				default:
-					System.out.println("Erreur " + debut.split("\\s")[1] + " - Veuillez réesayer");
+					System.out.println("Erreur " + debut.split("\\s")[1] + " - Veuillez rÃ©esayer");
 				
 			}
 			
@@ -86,17 +86,17 @@ public class HTTP_Client {
 				regex = debut.split("\\s")[0].toLowerCase(); // Premier mot de la ligne courant en minuscule
 			}
 			
-			System.out.println(debut); //Afficher la premiere ligne du fichier retourné dans la sortie standard du client
-			htmlFile.println(debut); //Afficher la premiere ligne du fichier retourné par le serveur dans le fichier sauvegardé par le client
+			System.out.println(debut); //Afficher la premiere ligne du fichier retournÃ© dans la sortie standard du client
+			htmlFile.println(debut); //Afficher la premiere ligne du fichier retournÃ© par le serveur dans le fichier sauvegardï¿½ par le client
 			
 			while((response = in.readLine()) != null)
 			{
-				htmlFile.println(response); //Sauvegarde la page renvoyée par le serveur
+				htmlFile.println(response); //Sauvegarde la page renvoyÃ©e par le serveur
 				System.out.println(response);
 				
 			}
 			
-			System.out.println("Fichier édité !");
+			System.out.println("Fichier Ã©ditÃ© !");
 			
 			htmlFile.close();
 			sendSocket.close();
