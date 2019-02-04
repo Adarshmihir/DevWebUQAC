@@ -24,7 +24,7 @@ class Account
     /**
      * @var string
      *
-     * @ORM\Column(name="Owner", type="string", length=255)
+     * @ORM\Column(name="Owner", type="string", length=255, unique=true)
      */
     private $owner;
 
@@ -38,14 +38,14 @@ class Account
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="LastOp", type="date")
+     * @ORM\Column(name="LastOp", type="datetime", nullable=true)
      */
     private $lastOp;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="CreationDate", type="date")
+     * @ORM\Column(name="CreationDate", type="datetime")
      */
     private $creationDate;
 
