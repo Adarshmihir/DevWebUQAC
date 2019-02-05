@@ -2,7 +2,9 @@
 
 {% block body %}
     <div class="container-fluid center-block" style="text-align: center"><br><br>
-        <h1>Comptes bancaires</h1><a href="{{ url('createAccount') }}">Créer un compte</a>
+        <h1>Comptes bancaires</h1>
+        <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('createAccount') }}">Créer un compte</a>
+        <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('makeChanges') }}">Faire des opérations sur un compte</a>
         <div class="row">
             <div class="col-md-4"><br></div>
             <div class="col-md-4">

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid center-block" style="text-align: center"><br><br>
+        <h1>Faire des opérations sur un compte bancaire</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('add') }}">Déposer de l'argent</a>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('remove') }}">Retirer de l'argent</a>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('position') }}">Consulter la position d'un compte</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %} {{ parent() }}
+{% endblock %}
