@@ -16,8 +16,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        // create 20 products! Bam!
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $Account = new Account();
             $Account->setOwner('Account '.$i);
             $Account->setAmount(mt_rand(100, 10000));

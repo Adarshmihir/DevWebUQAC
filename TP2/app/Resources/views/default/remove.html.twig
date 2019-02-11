@@ -2,7 +2,23 @@
 
 {% block body %}
     <div class="container-fluid center-block" style="text-align: center"><br><br>
-        <h1>Remove page</h1>
+        <h1>Retirer de l'argent du compte de {{ account.owner }}</h1>
+        <div class="row"><br/>
+            <div class="col-md-5">
+            </div>
+            <div class="col-md-2">
+                {{ form(form) }}
+            </div>
+        </div><br><br><br>
+        <div class="row" style="text-align: center">
+            <div class="col-md-12">
+            <a style="text-decoration: none; color: white;" href="{{ url('makeChanges', {'id': account.id}) }}">
+                <button class="btn btn-danger">
+                    Retour
+                </button>
+            </a>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

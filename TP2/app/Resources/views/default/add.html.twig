@@ -2,21 +2,22 @@
 
 {% block body %}
     <div class="container center-block" style="text-align: center"><br><br>
-        <h1>Add page</h1>
-        <div class="row"><br/></div>
+        <h1>Déposer de l'argent sur le compte de {{ account.owner }}</h1>
+        <div class="row"><br/>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                {{ form(form) }}
+            </div>
+        </div><br><br><br>
         <div class="row">
-        	<div class="col-md">
-        		<p>Entrez le nom du compte :</p>
-        	</div>
-        	<div class="col-md">
-        		<input type="text" class="form-control" id="inputPassword" placeholder="Nom du compte">
-        	</div>
-        </div>
-        <div class="row"><br/></div>
-        <div class="row align-items-center">
-        	<div class="col-md">
-        		<a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('add') }}">Déposer de l'argent</a>
-        	</div>
+            <div class="col-md-12">
+                <a style="text-decoration: none; color: white;" href="{{ url('makeChanges', {'id': account.id}) }}">
+                    <button class="btn btn-danger">
+                        Retour
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}
