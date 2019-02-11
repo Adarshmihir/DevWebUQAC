@@ -48,4 +48,32 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+    * @Route("/makeChanges", name="makeChanges")
+    */
+    public function makeChangesAction(Request $request){
+        return $this->render('default/makeChanges.html.twig');
+    }
+
+    /**
+    * @Route("/add", name="add")
+    */
+    public function addAction(Request $request){
+        return $this->render('default/add.html.twig');
+    }
+
+    /**
+    * @Route("/remove", name="remove")
+    */
+    public function removeAction(Request $request){
+        return $this->render('default/remove.html.twig');
+    }
+
+    /**
+    * @Route("/position", name="position")
+    */
+    public function positionAction(Request $request){
+        return $this->render('default/position.html.twig');
+    }
+
 }
