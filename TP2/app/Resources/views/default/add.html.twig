@@ -1,8 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid center-block" style="text-align: center"><br><br>
+    <div class="container center-block" style="text-align: center"><br><br>
         <h1>Add page</h1>
+        <div class="row"><br/></div>
+        <div class="row">
+        	<div class="col-md">
+        		<p>Entrez le nom du compte :</p>
+        	</div>
+        	<div class="col-md">
+        		<input type="text" class="form-control" id="inputPassword" placeholder="Nom du compte">
+        	</div>
+        </div>
+        <div class="row"><br/></div>
+        <div class="row align-items-center">
+        	<div class="col-md">
+        		<a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('add') }}">Déposer de l'argent</a>
+        		<?php
+        			if($newAmount == "O")
+        				<p>{{newAmount}}</p>
+        		?>        		
+        	</div>
+        </div>
     </div>
 {% endblock %}
 

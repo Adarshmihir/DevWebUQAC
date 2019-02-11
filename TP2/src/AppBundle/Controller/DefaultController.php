@@ -61,7 +61,12 @@ class DefaultController extends Controller
     * @Route("/add", name="add")
     */
     public function addAction(Request $request){
-        return $this->render('default/add.html.twig');
+        //If amount != null $ amount>0
+        //Add amount of money to account position
+        //Then send the new amount to the view to add feedback after operation
+        return $this->render('default/add.html.twig', [
+            'newAmount' => "OK"
+        ]);
     }
 
     /**
