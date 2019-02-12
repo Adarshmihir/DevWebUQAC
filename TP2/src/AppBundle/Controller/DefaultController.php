@@ -107,8 +107,15 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $form->getData()['amountToAdd'] > 0) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
+            if ($data['amountToAdd'] < 0){
+                $this->get('session')->getFlashBag()->add('danger', 'Le montant doit être positif ! Nous n\'avons pas pu traiter votre demande.');
+                return $this->redirectToRoute('makeChanges', [
+                    "id" => $id
+                ]);
+            }
             $account->setAmount($account->getAmount() + $data['amountToAdd']);
             $em -> persist($account);
             $em -> flush();
