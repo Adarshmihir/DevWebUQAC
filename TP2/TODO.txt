@@ -1,0 +1,3 @@
+Verification des champs : valeur / type / minimum 
+Placeholders
+Changer proprio page accueil

@@ -25,8 +25,6 @@ class DefaultController extends Controller
 
         $AccountList = $repo->findAll();
 
-        dump($AccountList);
-
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'accountList' => $AccountList
