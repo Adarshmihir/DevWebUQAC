@@ -18,7 +18,9 @@
         <div class="row center">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                État du compte : {{ account.owner }} &nbsp;&nbsp;&nbsp;&nbsp; Montant disponible : {{ account.amount }} &nbsp;&nbsp;&nbsp;&nbsp; Dernière opération : {{ account.lastOp | date("d/m/y") }}
+                <i style="font-weight: bold; font-style: normal;">État du compte :</i> {{ account.owner }} &nbsp;&nbsp;&nbsp;&nbsp;
+                <i style="font-weight: bold; font-style: normal;">Montant disponible :</i> {{ account.amount }} &nbsp;&nbsp;&nbsp;&nbsp;
+                <i style="font-weight: bold; font-style: normal;">Dernière opération :</i> {{ account.lastOp | date("d/m/y") }}
             </div>
         </div>
         <br><br><br><br>

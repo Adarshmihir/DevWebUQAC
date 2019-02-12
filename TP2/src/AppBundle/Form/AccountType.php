@@ -17,10 +17,10 @@ class AccountType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        /*$builder
             ->add('owner', TextType::class, ['label'=> 'Nom du propriétaire'])
             ->add('amount', IntegerType::class, ['label'=>'Montant initial'])
-            ->add('Envoyer', SubmitType::class);
+            ->add('Creer', SubmitType::class);*/
     }/**
      * {@inheritdoc}
      */

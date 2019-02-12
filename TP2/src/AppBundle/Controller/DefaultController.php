@@ -7,11 +7,13 @@ use AppBundle\Form\AccountType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 class DefaultController extends Controller
 {
@@ -38,7 +40,11 @@ class DefaultController extends Controller
         $newAccount = new Account();
 
         $formBuilder = $this->get('form.factory')->createBuilder(AccountType::class, $newAccount);
-        $form = $formBuilder->getForm();
+        $form = $formBuilder
+                ->add('owner', TextType::class, ["label" => "Nom du propriétaire", "attr" => ["placeholder" => "Ex. John"]])
+                ->add('amount', NumberType::class,["label" => "Montant initial", "attr" => ["placeholder" => "Ex. 10 000"]])
+                ->add('Creer', SubmitType::class)
+                ->getForm();
 
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
@@ -79,7 +85,7 @@ class DefaultController extends Controller
     /**
     * @Route("/add/{id}", name="add")
     */
-    public function addAction(Request $request, $id){
+    public function addAction(Request $request, $id) {
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Account::class);
@@ -87,13 +93,21 @@ class DefaultController extends Controller
         $account = $repo->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('amountToAdd', NumberType::class,["label"=> "Saisissez le montant à déposer sur le compte."])
-            ->add('Déposer', SubmitType::class)
+            ->add('amountToAdd', NumberType::class, [
+                "label" => "Saisissez le montant à déposer sur le compte.",
+                "attr" => ["placeholder" => "Ex. 10 000"],
+                "constraints" => [
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('Deposer', SubmitType::class)
             ->getForm();
+
+        $form->getData()['amountToAdd'] = 10;
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $form->getData()['amountToAdd'] > 0) {
             $data = $form->getData();
             $account->setAmount($account->getAmount() + $data['amountToAdd']);
             $em -> persist($account);
@@ -104,12 +118,16 @@ class DefaultController extends Controller
             return $this->redirectToRoute('makeChanges', [
                 "id" => $id
             ]);
-        } else {
-            return $this->render('default/add.html.twig', [
-                'form' => $form->createView(),
-                'account' => $account
-            ]);
         }
+
+        return $this->render('default/add.html.twig', [
+            'form' => $form->createView(),
+            'id' => $id,
+            'account' => $account,
+        ]);
+
+        
+        
     }
 
     /**
@@ -125,14 +143,17 @@ class DefaultController extends Controller
         $form = $this->createFormBuilder()
             ->add('amountToExtract', NumberType::class,[
                 "label"=> "Saisissez le montant à retirer",
-                'empty_data'=> 500
+                "attr" => ["placeholder" => "Ex. 10 000"],
+                "constraints" => [
+                    new Type(['type' => 'numeric']),
+                ],
             ])
             ->add('Retirer', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && (($account->getAmount() - $form->getData()['amountToExtract']) >= 0)) {
             $data = $form->getData();
             $account->setAmount($account->getAmount() - $data['amountToExtract']);
             $em -> persist($account);

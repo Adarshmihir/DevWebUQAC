@@ -2,12 +2,15 @@
 
 {% block body %}
     <div class="container-fluid center-block" style="text-align: center"><br><br>
-        <h1>Position du compte de {{ account.owner }}</h1>
+        <h1>Position du compte "{{ account.owner }}"</h1>
     </div><br><br>
     <div class="row container-fluid center">
         <div class="col-md-3"></div>
         <div class="col-md-6" style="text-align: center;">
-            État du compte : {{ account.owner }} &nbsp;&nbsp;&nbsp;&nbsp; Montant disponible : {{ account.amount }} &nbsp;&nbsp;&nbsp;&nbsp; Dernière opération : {{ account.lastOp | date("d/m/y") }} &nbsp;&nbsp;&nbsp;&nbsp; Date de création : {{ account.creationDate | date("d/m/y") }}
+            <i style="font-weight: bold; font-style: normal;">État du compte :</i> {{ account.owner }} &nbsp;&nbsp;&nbsp;&nbsp;
+            <i style="font-weight: bold; font-style: normal;">Montant disponible :</i> {{ account.amount }} &nbsp;&nbsp;&nbsp;&nbsp;
+            <i style="font-weight: bold; font-style: normal;">Dernière opération :</i> {{ account.lastOp | date("d/m/y") }} &nbsp;&nbsp;&nbsp;&nbsp;
+            <i style="font-weight: bold; font-style: normal;">Date de création :</i> {{ account.creationDate | date("d/m/y") }}
         </div>
     </div><br><br><br>
     <div class="row container-fluid" style="text-align: center">
