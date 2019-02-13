@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Account;
 use AppBundle\Form\AccountType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,30 +36,32 @@ class DefaultController extends Controller
     /**
      * @Route("/createAccount", name="createAccount")
      */
-    public function createAccountAction(Request $request){
+    public function createAccountAction(Request $request) {
         $newAccount = new Account();
 
         $formBuilder = $this->get('form.factory')->createBuilder(AccountType::class, $newAccount);
-        $form = $formBuilder
-                ->add('owner', TextType::class, ["label" => "Nom du propriétaire", "attr" => ["placeholder" => "Ex. John"]])
-                ->add('amount', NumberType::class,["label" => "Montant initial", "attr" => ["placeholder" => "Ex. 10 000"]])
-                ->add('Creer', SubmitType::class)
-                ->getForm();
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
 
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST') && $form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            
+            if(!ctype_alnum($data->getOwner()) || !preg_match('/^[A-z]{3,}[0-9]*/', $data->getOwner()) || $data->getAmount() < 0) {
+                $this->get('session')->getFlashBag()
+                    ->add('danger', 'Le compte n\'a pas pu etre créé pour une des raisons suivantes : Le nom ne commence pas par 3 lettres consécutives, ne contient pas des chiffres et des lettres uniquement ou le montant saisi est inférieur à 0 $');
+                return $this->redirectToRoute('createAccount');
+            }
+
             $em = $this->getDoctrine()->getManager();
-
-            $form->handleRequest($request);
-
             $newAccount->setLastOp(new \DateTime());
             $newAccount->setCreationDate(new \DateTime('now'));
+
             $em->persist($newAccount);
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('info', 'Le compte a bien été créé');
 
             return $this->redirectToRoute('homepage');
-
         }
 
         return $this->render('default/createAccount.html.twig', [
@@ -70,7 +72,7 @@ class DefaultController extends Controller
     /**
     * @Route("/makeChanges/{id}", name="makeChanges")
     */
-    public function makeChangesAction(Request $request, $id){
+    public function makeChangesAction(Request $request, $id) {
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Account::class);
@@ -93,9 +95,9 @@ class DefaultController extends Controller
         $account = $repo->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('amountToAdd', NumberType::class, [
+            ->add('amountToAdd', IntegerType::class, [
                 "label" => "Saisissez le montant à déposer sur le compte.",
-                "attr" => ["placeholder" => "Ex. 10 000"],
+                "attr" => ["placeholder" => "Ex. 10.000"],
                 "constraints" => [
                     new Type(['type' => 'numeric']),
                 ],
@@ -103,17 +105,18 @@ class DefaultController extends Controller
             ->add('Deposer', SubmitType::class)
             ->getForm();
 
-        $form->getData()['amountToAdd'] = 10;
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            if ($data['amountToAdd'] < 0){
-                $this->get('session')->getFlashBag()->add('danger', 'Le montant doit être positif ! Nous n\'avons pas pu traiter votre demande.');
-                return $this->redirectToRoute('makeChanges', [
-                    "id" => $id
+            if ($data['amountToAdd'] <= 0) {
+                $this->get('session')->getFlashBag()->add('danger', 'Le montant doit être supérieur à 0 $ ! Nous n\'avons pas pu traiter votre demande.');
+                
+                return $this->render('default/add.html.twig', [
+                    'form' => $form->createView(),
+                    'id' => $id,
+                    'account' => $account,
                 ]);
             }
             $account->setAmount($account->getAmount() + $data['amountToAdd']);
@@ -148,7 +151,7 @@ class DefaultController extends Controller
         $account = $repo->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('amountToExtract', NumberType::class,[
+            ->add('amountToExtract', IntegerType::class,[
                 "label"=> "Saisissez le montant à retirer",
                 "attr" => ["placeholder" => "Ex. 10 000"],
                 "constraints" => [
@@ -160,8 +163,18 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && (($account->getAmount() - $form->getData()['amountToExtract']) >= 0)) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
+            if ($data['amountToExtract'] <= 0) {
+                $this->get('session')->getFlashBag()->add('danger', 'Le montant doit être supérieur à 0 $ ! Nous n\'avons pas pu traiter votre demande.');
+                
+                return $this->render('default/remove.html.twig', [
+                    'form' => $form->createView(),
+                    'id' => $id,
+                    'account' => $account,
+                ]);
+            }
             $account->setAmount($account->getAmount() - $data['amountToExtract']);
             $em -> persist($account);
             $em -> flush();
@@ -169,8 +182,7 @@ class DefaultController extends Controller
             $this->get('session')->getFlashBag()->add('info', 'Le retrait a bien été effectué');
 
             return $this->redirectToRoute('makeChanges', [
-                "id" => $id,
-                "account"=> $account
+                "id" => $id
             ]);
         }
 

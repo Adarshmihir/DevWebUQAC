@@ -20,7 +20,7 @@
                     {% for account in accountList %}
                             <th scope="row">{{ account.id }}</th>
                             <td><a href="{{ url('makeChanges', {"id": account.id}) }}">{{ account.owner }}</a></td>
-                            <td><a href="{{ url('makeChanges', {"id": account.id}) }}">{{ account.amount }}</a></td>
+                            <td><a href="{{ url('makeChanges', {"id": account.id}) }}">{{ account.amount }} $</a></td>
                             <td><a href="{{ url('makeChanges', {"id": account.id}) }}">{{ account.lastOp | date("d/m/y") }}</a></td>
                         </tr></a>
                     {% endfor %}
@@ -29,7 +29,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block stylesheets %} {{ parent() }}

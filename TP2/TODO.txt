@@ -1,3 +1,1 @@
-Verifier si un retrait est possible = compte pas a decouvert au moment ou on demande le retrait -> flashbag
-Verifier si un depot est possible = montant > 0 au moment ou on demande le depot -> flashbag
-encodage page ajout
+gestion des erreurs HTTP
