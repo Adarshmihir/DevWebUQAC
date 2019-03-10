@@ -5,9 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Account;
 use AppBundle\Form\AccountType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
@@ -95,7 +94,7 @@ class DefaultController extends Controller
         $account = $repo->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('amountToAdd', IntegerType::class, [
+            ->add('amountToAdd', NumberType::class, [
                 "label" => "Saisissez le montant à déposer sur le compte.",
                 "attr" => ["placeholder" => "Ex. 10.000"],
                 "constraints" => [
@@ -151,7 +150,7 @@ class DefaultController extends Controller
         $account = $repo->find($id);
 
         $form = $this->createFormBuilder()
-            ->add('amountToExtract', IntegerType::class,[
+            ->add('amountToExtract', NumberType::class,[
                 "label"=> "Saisissez le montant à retirer",
                 "attr" => ["placeholder" => "Ex. 10 000"],
                 "constraints" => [

@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -21,7 +22,7 @@ class AccountType extends AbstractType
             ->add('owner', TextType::class, [
                 'label'=> 'Nom du propriétaire',
                 'attr' => ['placeholder' => 'Ex. John']])
-            ->add('amount', IntegerType::class, [
+            ->add('amount', NumberType::class, [
                 'label'=>'Montant initial',
                 'attr' => ['placeholder' => 'Ex. 10.000']])
             ->add('Creer', SubmitType::class);

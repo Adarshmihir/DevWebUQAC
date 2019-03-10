@@ -29,9 +29,9 @@ class Account
     private $owner;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="Amount", type="integer")
+     * @ORM\Column(name="Amount", type="float")
      */
     private $amount;
 
@@ -87,7 +87,7 @@ class Account
     /**
      * Set amount
      *
-     * @param integer $amount
+     * @param float $amount
      *
      * @return Account
      */
@@ -101,7 +101,7 @@ class Account
     /**
      * Get amount
      *
-     * @return int
+     * @return float
      */
     public function getAmount()
     {
