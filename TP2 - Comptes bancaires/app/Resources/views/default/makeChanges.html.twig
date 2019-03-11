@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid center-block" style="text-align: center"><br><br>
+        <h1>Faire des opérations sur un compte bancaire</h1><br><br>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('add', {"id": account.id}) }}">Déposer de l'argent</a>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('remove', {"id": account.id}) }}">Retirer de l'argent</a>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-light btn-outline-dark btn-sm" href="{{ url('position', {"id": account.id}) }}">Consulter la position d'un compte</a>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="row center">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <i style="font-weight: bold; font-style: normal;">État du compte :</i> {{ account.owner }} &nbsp;&nbsp;&nbsp;&nbsp;
+                <i style="font-weight: bold; font-style: normal;">Montant disponible :</i> {{ account.amount }} $ &nbsp;&nbsp;&nbsp;&nbsp;
+                <i style="font-weight: bold; font-style: normal;">Dernière opération :</i> {{ account.lastOp | date("d/m/y") }}
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <a href="{{ url('homepage') }}">
+                    <button class="btn btn-danger">
+                        Revenir à la page d'accueil
+                    </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block stylesheets %} {{ parent() }}
+{% endblock %}

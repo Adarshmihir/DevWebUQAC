@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid center-block" style="text-align: center"><br><br>
+        <h1>Créer un compte bancaire</h1>
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        <div class="row">
+            <div class="col-md-4"><br></div>
+            <div class="col-md-4">
+                {{ form(form) }}
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <a href="{{ url('homepage') }}">
+                    <button class="btn btn-danger">
+                        Revenir à la page d'accueil
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %} {{ parent() }}
+{% endblock %}
