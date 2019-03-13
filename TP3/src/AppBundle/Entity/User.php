@@ -17,6 +17,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    const DRIVER_TYPE = "Driver";
+    const PASSENGER_TYPE = "Passenger";
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -29,4 +32,10 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+
+
+    /**
+     * @ORM\Column(type="string", name="type")
+     */
+    protected $type=User::PASSENGER_TYPE;
 }
