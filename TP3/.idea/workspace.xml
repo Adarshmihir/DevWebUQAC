@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="352ec162-c01a-40da-b10f-2e21dc67ede7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../app/Resources/views/default/editPrivateInfo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/AppBundle/Repository/TripRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/Resources/FOSUserBundle/views/Profile/show_content.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../app/Resources/FOSUserBundle/views/Profile/show_content.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/AppBundle/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/../src/AppBundle/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/AppBundle/Form/RegistrationType.php" beforeDir="false" afterPath="$PROJECT_DIR$/../src/AppBundle/Form/RegistrationType.php" afterDir="false" />
-    </list>
+    <list default="true" id="352ec162-c01a-40da-b10f-2e21dc67ede7" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../app/Resources/views/default/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+            <state relative-caret-position="480">
+              <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -267,18 +261,17 @@
       <option name="presentableId" value="Default" />
       <updated>1552482994101</updated>
       <workItem from="1552482998052" duration="750000" />
-      <workItem from="1552490866029" duration="26259000" />
+      <workItem from="1552490866029" duration="26519000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27009000" />
+    <option name="totallyTimeSpent" value="27269000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16712783" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16712783" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -291,7 +284,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17278618" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.41468683" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -530,8 +523,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../app/Resources/views/default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+        <state relative-caret-position="480">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
         </state>
       </provider>
     </entry>
