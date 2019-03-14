@@ -20,6 +20,7 @@ class User extends BaseUser
 {
     const DRIVER_TYPE = "Driver";
     const PASSENGER_TYPE = "Passenger";
+    const BOTH_TYPE = "Driver or Passenger";
 
     const SMOKE_AUTHORIZED = "Smoke is authorized";
     const ACCESS_PHONENUMBER = "Access to phonenumber";

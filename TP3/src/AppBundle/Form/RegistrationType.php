@@ -17,9 +17,9 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add ( 'phoneNumber', PhoneNumberType::class, array(
+       /* $builder->add ( 'phoneNumber', PhoneNumberType::class, array(
                 'format' => PhoneNumberFormat::NATIONAL)
-        );
+        );*/
     }
     public function getParent()
     {

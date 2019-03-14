@@ -2,9 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Trip;
+use AppBundle\Form\TripType;
+use AppBundle\Form\UserType;
+use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,14 +33,75 @@ class DefaultController extends Controller
      * @Route("/newTrip", name="newTrip")
      */
     public function newTripAction(Request $request){
-        return $this->render('default/newTrip.html.twig', []);
+        /** @var User $user */
+        $user = $this -> getUser();
+
+        $newTrip = new Trip();
+        $form = $this->createForm(TripType::class, $newTrip)
+            ->add('Create', SubmitType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            $newTrip->setUnitPricePlusFees($newTrip->getUnitPrice()); //TODO : Une fois qu'on aura la distance, calculer ça.
+            $newTrip->setNumberPlacesRemaining($newTrip->getInitialNumberPlaces());
+            $newTrip->setIdDriver($user->getId());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newTrip);
+            $em->flush();
+        }
+
+        return $this->render('default/newTrip.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
      * @Route("/searchTrip", name="searchTrip")
      */
     public function searchTripAction(Request $request){
-        return $this->render('default/searchTrip.html.twig', []);
+        $em = $this->getDoctrine()->getRepository(Trip::class);
+        $trips = $em->findAll();
+        return $this->render('default/searchTrip.html.twig', [
+            'trips' => $trips
+        ]);
+    }
+
+    /**
+     * @Route("/editPrivateInfo", name="editPrivateInfo")
+     */
+    public function editPrivateInfoAction(Request $request){
+        $user = $this->getUser();
+
+        $form = $this->createForm(UserType::class)
+            ->add('Send', SubmitType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            $data = $form->getData();
+            /** @var $user User */
+            $user->setPreference([
+                User::SMOKE_AUTHORIZED => $data["smoke"],
+                User::ACCESS_PHONENUMBER => $data["AccessPhoneNumber"],
+                User::ACCESS_MAIL => $data["AccessMail"],
+                User::CONDITIONING_AIR => $data["ConditioningAir"],
+                User::ANIMALS => $data["Animals"],
+                User::BIKE_RACK => $data["bikeRack"],
+                User::SKI_RACK => $data["skiRack"]
+            ]);
+            $user->setPhoneNumber($data["phoneNumber"]);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('default/editPrivateInfo.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
   /*  /**

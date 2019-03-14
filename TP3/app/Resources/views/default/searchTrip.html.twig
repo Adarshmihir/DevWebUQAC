@@ -1,4 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="container-fluid row">
+        <div class="col-md-4"></div>
+        {% for trip in trips %}
+            <div class="col-md-4 border border-primary rounded" style="text-align: center; padding: 3% 2% 3% 2%;">
+                Depart : {{ trip.departureTime | date('Y-m-d H:i') }} <br>
+                Adresse de départ : {{ trip.startingPlace }}<br>
+                Adresse d'arrivée : {{ trip.endingPlace }}<br>
+                Prix : {{ trip.unitPricePlusFees }}<br>
+                Nombre de place : {{ trip.numberPlacesRemaining }}<br>
+                Type de pneu : {{ trip.tireType }}<br>
+                Place disponible par passager : {{ trip.availableSpacePerPassenger }}<br>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
