@@ -49,6 +49,15 @@
       <path value="$PROJECT_DIR$/../vendor/giggsey/locale" />
       <path value="$PROJECT_DIR$/../vendor/giggsey/libphonenumber-for-php" />
       <path value="$PROJECT_DIR$/../vendor/misd/phone-number-bundle" />
+      <path value="$PROJECT_DIR$/../vendor/php-http/message-factory" />
+      <path value="$PROJECT_DIR$/../vendor/kriswallsmith/buzz" />
+      <path value="$PROJECT_DIR$/../vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/../vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/../vendor/gremo/buzz-bundle" />
+      <path value="$PROJECT_DIR$/../vendor/nyholm/psr7" />
+      <path value="$PROJECT_DIR$/../vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/../vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/../vendor/psr/http-factory" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />

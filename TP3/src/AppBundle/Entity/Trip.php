@@ -51,11 +51,32 @@ class Trip
     private $startingPlace;
 
     /**
+     * @ORM\Column(name="latStart", type="float")
+     */
+    private $latStart=0.0;
+
+    /**
+     * @ORM\Column(name="lngStart", type="float")
+     */
+    private $lngStart=0.0;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="endingPlace", type="string", length=255)
      */
     private $endingPlace;
+
+    /**
+     * @ORM\Column(name="latEnding", type="float")
+     */
+    private $latEnding=0.0;
+
+    /**
+     * @ORM\Column(name="lngEnding", type="float")
+     */
+    private $lngEnding=0.0;
 
     /**
      * @var float
@@ -195,6 +216,71 @@ class Trip
     {
         return $this->endingPlace;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLatStart()
+    {
+        return $this->latStart;
+    }
+
+    /**
+     * @param mixed $latStart
+     */
+    public function setLatStart($latStart)
+    {
+        $this->latStart = $latStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLngStart()
+    {
+        return $this->lngStart;
+    }
+
+    /**
+     * @param mixed $lngStart
+     */
+    public function setLngStart($lngStart)
+    {
+        $this->lngStart = $lngStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatEnding()
+    {
+        return $this->latEnding;
+    }
+
+    /**
+     * @param mixed $latEnding
+     */
+    public function setLatEnding($latEnding)
+    {
+        $this->latEnding = $latEnding;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLngEnding()
+    {
+        return $this->lngEnding;
+    }
+
+    /**
+     * @param mixed $lngEnding
+     */
+    public function setLngEnding($lngEnding)
+    {
+        $this->lngEnding = $lngEnding;
+    }
+
 
     /**
      * Set unitPrice.

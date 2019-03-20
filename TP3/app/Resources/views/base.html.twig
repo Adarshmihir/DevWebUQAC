@@ -12,10 +12,14 @@
     {% block header %}
         <ul>
             <li>
-                <a href="{{ url('fos_user_security_login') }}">Se connecter</a>
-            </li>
-            <li>
-                <a href="{{ url('fos_user_registration_register') }}">S'inscrire</a>
+                {% if app.user.id is not defined %}
+                    <a href="{{ url('fos_user_security_login') }}">Se connecter</a>
+                </li>
+                <li>
+                    <a href="{{ url('fos_user_registration_register') }}">S'inscrire</a>
+                {% else %}
+                    <a href="{{ url('fos_user_profile_show') }}">Mon profil</a>
+                {% endif %}
             </li>
             <li>
                 <a href="{{ url('homepage') }}">Accueil</a>
@@ -25,9 +29,6 @@
             </li>
             <li>
                 <a href="{{ url('searchTrip') }}">Chercher un voyage</a>
-            </li>
-            <li>
-                <a href="{{ url('fos_user_profile_show') }}">Mon profil</a>
             </li>
         </ul>
     {% endblock %}

@@ -47,6 +47,15 @@ class DefaultController extends Controller
             $newTrip->setNumberPlacesRemaining($newTrip->getInitialNumberPlaces());
             $newTrip->setIdDriver($user->getId());
 
+            $urlStart = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $newTrip->getStartingPlace() . '&key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA';
+            $urlEnd = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $newTrip->getEndingPlace() . '&key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA';
+
+            // ça me rend fou mdr
+            $res = curl_init($urlStart);
+            dump($res);
+
+            die;
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($newTrip);
             $em->flush();
