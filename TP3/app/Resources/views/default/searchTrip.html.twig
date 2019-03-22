@@ -3,8 +3,15 @@
 {% block body %}
     <div class="container-fluid row">
         <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form(form) }}
+        </div>
+    </div>
+    <div class="container-fluid row">
         {% for trip in trips %}
             <div class="col-md-4 border border-primary rounded" style="text-align: center; padding: 3% 2% 3% 2%;">
+                <a href="{{ url('trip', { 'id': trip.id}) }}">Voir le détail</a><br>
                 Depart : {{ trip.departureTime | date('Y-m-d H:i') }} <br>
                 Adresse de départ : {{ trip.startingPlace }}<br>
                 Adresse d'arrivée : {{ trip.endingPlace }}<br>
@@ -15,4 +22,16 @@
             </div>
         {% endfor %}
     </div>
+
+    <script>
+        // Using this tutorial for autocomplete address : https://www.youtube.com/watch?v=Rpzp0yCAmq4
+        function activatePlacesSearch(){
+            var inputstart = document.getElementById("form_startPlace");
+            var inputend = document.getElementById("form_endPlace");
+            var autocompletestart = new google.maps.places.Autocomplete(inputstart);
+            var autocompleteend = new google.maps.places.Autocomplete(inputend);
+        }
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA&libraries=places&callback=activatePlacesSearch"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {% endblock %}

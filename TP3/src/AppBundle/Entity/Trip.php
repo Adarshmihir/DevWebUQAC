@@ -473,4 +473,12 @@ class Trip
     {
         return $this->passengers;
     }
+
+    public function addPassengers($passenger){
+        $passengers = $this->passengers;
+        $passengers[] = $passenger;
+        $this->passengers = $passengers;
+
+        return $this;
+    }
 }

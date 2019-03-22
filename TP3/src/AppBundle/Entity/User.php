@@ -73,7 +73,36 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", name="phoneNumber", nullable=true)
      */
-    protected   $phoneNumber;
+    protected $phoneNumber;
+
+    /**
+     * @ORM\Column(type="array", name="tripSave", nullable=true)
+     */
+    protected $tripSave;
+
+    /**
+     * @return mixed
+     */
+    public function getTripSave()
+    {
+        return $this->tripSave;
+    }
+
+    /**
+     * @param mixed $tripSave
+     */
+    public function setTripSave($tripSave)
+    {
+        $this->tripSave = $tripSave;
+    }
+
+    public function addTripSave($trip){
+        $trips = $this->tripSave;
+        $trips[] = $trip;
+        $this->tripSave = $trips;
+
+        return $this;
+    }
 
     /**
      * @return mixed

@@ -23,15 +23,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
 
-        // Get coordinates of address on submit form, and make a post request to server to keep it
-        $("form[name='appbundle_trip']").submit(function(event){
-            // $.get( "https://maps.googleapis.com/maps/api/geocode/json?address=" + $("#appbundle_trip_startingPlace").val() + "&key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA", function( data ) {
-            //     console.log(data.results[0].geometry.location.lat);
-            //     console.log(data.results[0].geometry.location.lng);
-            //
-            //     alert("Load was performed.");
-            // });
-        });
+        // C'est finalement fait dans le controller.
+        // // Get coordinates of address on submit form, and make a post request to server to keep it
+        // $("form[name='appbundle_trip']").submit(function(event){
+        //     $.get( "https://maps.googleapis.com/maps/api/geocode/json?address=" + $("#appbundle_trip_startingPlace").val() + "&key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA", function( data ) {
+        //         $("#appbundle_trip_latStart").val('data.results[0].geometry.location.lat');
+        //         $("#appbundle_trip_lngStart").val(data.results[0].geometry.location.lng);
+        //
+        //         console.log($("#appbundle_trip_latStart").val());
+        //         console.log($("#appbundle_trip_lngStart").val());
+        //
+        //         alert("Load was performed.");
+        //     });
+        //
+        //     $.get( "https://maps.googleapis.com/maps/api/geocode/json?address=" + $("#appbundle_trip_endingPlace").val() + "&key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA", function( data ) {
+        //         $("#appbundle_trip_latEnding").val(data.results[0].geometry.location.lat);
+        //         $("#appbundle_trip_lngEnding").val(data.results[0].geometry.location.lng);
+        //
+        //         alert("Load was performed.");
+        //     });
+        //
+        // });
     </script>
 
 {% endblock %}

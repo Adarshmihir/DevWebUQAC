@@ -9,8 +9,14 @@ use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
+use mysql_xdevapi\Result;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -47,18 +53,28 @@ class DefaultController extends Controller
             $newTrip->setNumberPlacesRemaining($newTrip->getInitialNumberPlaces());
             $newTrip->setIdDriver($user->getId());
 
-            $urlStart = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $newTrip->getStartingPlace() . '&key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA';
-            $urlEnd = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $newTrip->getEndingPlace() . '&key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA';
 
-            // ça me rend fou mdr
-            $res = curl_init($urlStart);
-            dump($res);
+            // Récupération des coordonnées GPS des adresse données grâce à l'API de Google Maps.
+            $urlStart = 'https://maps.googleapis.com/maps/api/geocode/json?';
+            $urlEnd = 'https://maps.googleapis.com/maps/api/geocode/json?';
+            $optionsStart = array("address"=>$newTrip->getStartingPlace(),"key"=>"AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA");
+            $optionsEnd = array("address"=>$newTrip->getEndingPlace(),"key"=>"AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA");
+            $urlStart .= http_build_query($optionsStart,'','&');
+            $urlEnd .= http_build_query($optionsEnd,'','&');
 
-            die;
+            $coordStart = json_decode((file_get_contents(htmlspecialchars_decode($urlStart))))->results[0]->geometry->location;
+            $newTrip->setLatStart($coordStart->lat);
+            $newTrip->setLngStart($coordStart->lng);
+
+            $coordEnd = json_decode((file_get_contents(htmlspecialchars_decode($urlEnd))))->results[0]->geometry->location;
+            $newTrip->setLatEnding($coordEnd->lat);
+            $newTrip->setLngEnding($coordEnd->lng);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($newTrip);
             $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', 'Le voyage a bien été proposé.');
         }
 
         return $this->render('default/newTrip.html.twig', [
@@ -71,9 +87,43 @@ class DefaultController extends Controller
      */
     public function searchTripAction(Request $request){
         $em = $this->getDoctrine()->getRepository(Trip::class);
+
+        $form = $this->createFormBuilder()
+            ->add('startPlace', TextType::class)
+            ->add('endPlace', TextType::class)
+            ->add('dateTime', DateType::class)
+            ->add('send', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            // Récupération des coordonnées GPS des adresse données grâce à l'API de Google Maps.
+            $urlStart = 'https://maps.googleapis.com/maps/api/geocode/json?';
+            $urlEnd = 'https://maps.googleapis.com/maps/api/geocode/json?';
+            $optionsStart = array("address"=>$data["startPlace"],"key"=>"AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA");
+            $optionsEnd = array("address"=>$data["endPlace"],"key"=>"AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA");
+            $urlStart .= http_build_query($optionsStart,'','&');
+            $urlEnd .= http_build_query($optionsEnd,'','&');
+
+            $coordStart = json_decode((file_get_contents(htmlspecialchars_decode($urlStart))))->results[0]->geometry->location;
+
+            $coordEnd = json_decode((file_get_contents(htmlspecialchars_decode($urlEnd))))->results[0]->geometry->location;
+
+            //TODO : Faire quelque chose avec ça derrière pour retourner des résultats pertinents.
+
+            dump($coordStart);
+            dump($coordEnd);
+            dump($data);die;
+        }
+
+
         $trips = $em->findAll();
         return $this->render('default/searchTrip.html.twig', [
-            'trips' => $trips
+            'trips' => $trips,
+            'form' => $form->createView()
         ]);
     }
 
@@ -109,6 +159,77 @@ class DefaultController extends Controller
         }
 
         return $this->render('default/editPrivateInfo.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+
+    /**
+     * @Route("/trip/{id}", name="trip")
+     */
+    public function tripAction(Request $request, $id){
+        $repository = $this->getDoctrine()->getRepository(Trip::class);
+        /** @var Trip $trip */
+        $trip = $repository->find($id);
+        $driver = $this->getDoctrine()->getRepository(User::class)->find($trip->getIdDriver());
+
+        $form = $this->createFormBuilder()
+            ->add('numberPlaces', IntegerType::class, ['label' => 'Nombre de place (Entre 0 et ' . $trip->getInitialNumberPlaces() . ')', 'attr' => ['min' => 0, 'max' => $trip->getInitialNumberPlaces()]])
+            ->add('Send', SubmitType::class, ['label' => 'Passer à la caisse'])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            return $this->redirectToRoute('saveTrip', [
+                'idTrip' => $id,
+                'numberPlaces' => $data['numberPlaces']
+            ]);
+        }
+
+        return $this->render('default/trip.html.twig', [
+            'trip' => $trip,
+            'driver' => $driver,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/saveTrip/{idTrip}/{numberPlaces}", name="saveTrip")
+     */
+    public function saveTripAction(Request $request, $idTrip, $numberPlaces){
+        /** @var Trip $trip */
+        $trip = $this->getDoctrine()->getRepository(Trip::class)->find($idTrip);
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $form = $this->createFormBuilder()
+            ->add('Send', SubmitType::class, ['label' => 'Payer (on suppose qu\'on a un vrai moyen de paiement.)'])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->addTripSave(["idTrip" => $idTrip, "numberPlaces" => $numberPlaces]);
+            $trip->addPassengers(["passenger" => $user->getId(), "numberPlaces" => $numberPlaces]);
+            $trip->setNumberPlacesRemaining($trip->getInitialNumberPlaces()-$numberPlaces);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($user);
+            $em->persist($trip);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', 'Vos places pour le covoiturage ont bien été réservée.');
+            return $this->redirectToRoute('searchTrip');
+        }
+
+
+        return $this->render('default/saveTrip.html.twig', [
+            'trip' => $trip,
+            'numberPlaces' => $numberPlaces,
             'form' => $form->createView()
         ]);
     }
