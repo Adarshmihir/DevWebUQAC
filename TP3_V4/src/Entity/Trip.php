@@ -6,7 +6,7 @@
  * Time: 00:46
  */
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Trip
  *
  * @ORM\Table(name="trip")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TripRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TripRepository")
  */
 class Trip
 {
