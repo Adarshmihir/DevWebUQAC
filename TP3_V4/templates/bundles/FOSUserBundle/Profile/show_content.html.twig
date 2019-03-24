@@ -1,16 +1,20 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <p><a href="{{ url('editPrivateInfo') }}">Modifier mes informations personnelles</a></p>
-    {{ dump(user.preference) }}
-    {% for key, item in user.preference %}
-        {{ key }} ==== {{ item }}
-        {% if item %}
-            Présent/vrai
-        {% else %}
-            Absent/faux
-        {% endif %} <br>
-    {% endfor %}
+<div class="fos_user_user_show container bg-light border">
+    <div class="row text-center border-bottom">
+        <p class="col-4 my-auto">{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+        <p class="col-4 my-auto">{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+        <a class="btn btn-primary col-4" href="{{ url('editPrivateInfo') }}">Modifier mes informations personnelles</a>
+    </div>
+    <ul class="list-group">
+        {% for key, item in user.preference %}
+            <li class="list-group-item">{{ key }} : {{ item }}
+            {% if item %}
+                Oui
+            {% else %}
+                Non
+            {% endif %}</li>
+            <br>
+        {% endfor %}
+    </ul>
 </div>

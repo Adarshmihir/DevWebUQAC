@@ -18,26 +18,26 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', ChoiceType::class, [
+            ->add('Type', ChoiceType::class, [
                 'choices'  => [
                     'Passager' => User::PASSENGER_TYPE,
                     'Conducteur' => User::DRIVER_TYPE,
                     'Les deux' => User::BOTH_TYPE,
                 ]
             ])
-            ->add('smoke', CheckboxType::class, [
+            ->add('AutoriseLaCigarette', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('AccessPhoneNumber', CheckboxType::class, [
+            ->add('AccesAMonNumeroDeTelephone', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('AccessMail', CheckboxType::class, [
+            ->add('AccesAMonAdresseMail', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('ConditioningAir', CheckboxType::class, [
+            ->add('AirConditionne', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('Animals', ChoiceType::class, [
+            ->add('AnimauxAutorises', ChoiceType::class, [
                 'choices'  => [
                     'Non' => User::NO_ANIMALS,
                     'En cage' => User::ANIMALS_IN_CAGE,
@@ -46,13 +46,13 @@ class UserType extends AbstractType
                 ],
                 'required' => true
             ])
-            ->add('bikeRack', CheckboxType::class, [
+            ->add('SupportAVelo', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('skiRack', CheckboxType::class, [
+            ->add('SupportASki', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('phoneNumber')
+            ->add('NumeroDeTelephone')
         ;
     }
 
