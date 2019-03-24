@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Symfony\Component\Validator\Constraints\DateTime;
+
 /**
  * TripRepository
  *
@@ -10,4 +12,14 @@ namespace App\Repository;
  */
 class TripRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllOrderedByDate()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT trip FROM App:Trip trip
+                WHERE trip.departureTime > 2018-01-01 
+                ORDER BY trip.departureTime ASC'
+            )
+            ->getResult();
+    }
 }

@@ -7,8 +7,6 @@ use App\Form\TripType;
 use App\Form\UserType;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
-use libphonenumber\PhoneNumberFormat;
-use libphonenumber\PhoneNumberUtil;
 use mysql_xdevapi\Result;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -87,6 +85,7 @@ class DefaultController extends Controller
      */
     public function searchTripAction(Request $request){
         $em = $this->getDoctrine()->getRepository(Trip::class);
+        $trips = $em->findAllOrderedByDate();
 
         $form = $this->createFormBuilder()
             ->add('startPlace', TextType::class)
@@ -114,17 +113,40 @@ class DefaultController extends Controller
 
             //TODO : Faire quelque chose avec ça derrière pour retourner des résultats pertinents.
 
+
+            foreach ($trips as $trip){
+
+            }
+            dump($trips);
             dump($coordStart);
             dump($coordEnd);
+            dump(self::distance($coordStart->lat, $coordStart->lng, $coordEnd->lat, $coordEnd->lng, 'k'));
             dump($data);die;
         }
 
 
-        $trips = $em->findAll();
         return $this->render('default/searchTrip.html.twig', [
             'trips' => $trips,
             'form' => $form->createView()
         ]);
+    }
+    // Calcule la distance en entre deux points et renvoie sa valeur en kilomètre si $unit est égal à 'k'
+    public static function distance($lat1, $lng1, $lat2, $lng2, $unit = 'k') {
+        $earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
+        $rlo1 = deg2rad($lng1);
+        $rla1 = deg2rad($lat1);
+        $rlo2 = deg2rad($lng2);
+        $rla2 = deg2rad($lat2);
+        $dlo = ($rlo2 - $rlo1) / 2;
+        $dla = ($rla2 - $rla1) / 2;
+        $a = (sin($dla) * sin($dla)) + cos($rla1) * cos($rla2) * (sin($dlo) * sin($dlo));
+        $d = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        //
+        $meter = ($earth_radius * $d);
+        if ($unit == 'k') {
+            return $meter / 1000;
+        }
+        return $meter;
     }
 
     /**
@@ -233,25 +255,4 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ]);
     }
-
-  /*  /**
-     * @Route("/registerCustom", name="register")
-     */
- /* public function registerAction(Request $request){
-        dump($request->request->get("fos_user_registration_form")["phoneNumber"]);
-        $phoneNumber = $this->container->get('libphonenumber.phone_number_util')
-            ->parse($request->request->get("fos_user_registration_form")["phoneNumber"], "FR");
-        dump($phoneNumber);
-        $data = $request->request->get("fos_user_registration_form");
-        $data['phoneNumber']=$phoneNumber;
-        $request->request->set("fos_user_registration_form", $data);
-        dump($request);
-        return $this->forward($this->routeToControllerName('register'));
-        //["phoneNumber"]);
-    }
-    private function routeToControllerName($routename) {
-        $routes = $this->get('router')->getRouteCollection();
-        return $routes->get($routename)->getDefaults()['_controller'];
-    }*/
-
 }

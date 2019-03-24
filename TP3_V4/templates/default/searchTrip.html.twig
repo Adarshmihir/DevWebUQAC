@@ -10,7 +10,8 @@
     </div>
     <div class="container-fluid row">
         {% for trip in trips %}
-            <div class="col-md-4 border border-primary rounded" style="text-align: center; padding: 3% 2% 3% 2%;">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 border border-primary rounded" style="text-align: center; padding: 3% 2% 3% 2%; margin-bottom: 5%">
                 <a href="{{ url('trip', { 'id': trip.id}) }}">Voir le détail</a><br>
                 Depart : {{ trip.departureTime | date('Y-m-d H:i') }} <br>
                 Adresse de départ : {{ trip.startingPlace }}<br>
@@ -20,6 +21,7 @@
                 Type de pneu : {{ trip.tireType }}<br>
                 Place disponible par passager : {{ trip.availableSpacePerPassenger }}<br>
             </div>
+            <div class="col-md-1"></div>
         {% endfor %}
     </div>
 
