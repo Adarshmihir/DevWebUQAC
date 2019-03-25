@@ -90,7 +90,7 @@ class DefaultController extends Controller
         $form = $this->createFormBuilder()
             ->add('startPlace', TextType::class, ['label' => 'Adresse de départ souhaitée'])
             ->add('endPlace', TextType::class, ['label' => 'Adresse d\'arrivée souhaitée'])
-            ->add('dateTime', DateType::class, ['label' => 'Date de départ'])
+            ->add('dateTime', DateType::class, ['label' => 'Date de départ', 'widget' => 'single_text'])
             ->add('Rechercher', SubmitType::class, ['attr' => ['class' => 'btn btn-primary btn-block' ]])
             ->getForm();
 
@@ -170,15 +170,15 @@ class DefaultController extends Controller
             $data = $form->getData();
             /** @var $user User */
             $user->setPreference([
-                User::SMOKE_AUTHORIZED => $data["smoke"],
-                User::ACCESS_PHONENUMBER => $data["AccessPhoneNumber"],
-                User::ACCESS_MAIL => $data["AccessMail"],
-                User::CONDITIONING_AIR => $data["ConditioningAir"],
-                User::ANIMALS => $data["Animals"],
-                User::BIKE_RACK => $data["bikeRack"],
-                User::SKI_RACK => $data["skiRack"]
+                User::SMOKE_AUTHORIZED => $data["AutoriseLaCigarette"],
+                User::ACCESS_PHONENUMBER => $data["AccesAMonNumeroDeTelephone"],
+                User::ACCESS_MAIL => $data["AccesAMonAdresseMail"],
+                User::CONDITIONING_AIR => $data["AirConditionne"],
+                User::ANIMALS => $data["AnimauxAutorises"],
+                User::BIKE_RACK => $data["SupportAVelo"],
+                User::SKI_RACK => $data["SupportASki"]
             ]);
-            $user->setPhoneNumber($data["phoneNumber"]);
+            $user->setPhoneNumber($data["NumeroDeTelephone"]);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

@@ -14,6 +14,10 @@
         </div>
     </div>
 
+    {% if TripSave|length == 0 %}
+        <h4 style="text-align: center">Vous n'avez encore aucune réservation ...</h4>
+    {% endif %}
+
     <div class="container-fluid row" style="text-align: center">
         {% for trip in TripSave %}
             <div class="col-md-4"></div>
@@ -34,6 +38,11 @@
             <br>
         </div>
     </div>
+
+
+    {% if trips|length == 0 %}
+        <h4 style="text-align: center">Vous n'avez encore proposé aucun voyage ...</h4>
+    {% endif %}
 
     <div class="container-fluid row">
         {% for trip in trips %}

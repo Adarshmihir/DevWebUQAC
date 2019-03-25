@@ -52,37 +52,9 @@ class UserType extends AbstractType
             ->add('SupportASki', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('NumeroDeTelephone')
+            ->add('NumeroDeTelephone', null, [
+                'required' => false
+            ])
         ;
     }
-
-/*[
-User::SMOKE_AUTHORIZED => false,
-self::ACCESS_PHONENUMBER => false,
-self::ACCESS_MAIL => false,
-self::CONDITIONING_AIR => false,
-self::ANIMALS => self::NO_ANIMALS,
-self::BIKE_RACK => false,
-self::SKI_RACK => false
-]*/
-
-/*    /**
-     * {@inheritdoc}
-     */
-/*    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User'
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-/*    public function getBlockPrefix()
-    {
-        return 'appbundle_user';
-    }
-
-*/
 }

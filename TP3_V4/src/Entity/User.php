@@ -22,19 +22,19 @@ class User extends BaseUser
     const PASSENGER_TYPE = "Passenger";
     const BOTH_TYPE = "Driver or Passenger";
 
-    const SMOKE_AUTHORIZED = "Smoke is authorized";
-    const ACCESS_PHONENUMBER = "Access to phonenumber";
-    const ACCESS_MAIL = "Access to mail";
-    const CONDITIONING_AIR = "Conditioning air";
+    const SMOKE_AUTHORIZED = "Fumeur autorisé dans la voiture";
+    const ACCESS_PHONENUMBER = "Accés au numéro de téléphone après réservation";
+    const ACCESS_MAIL = "Accés au mail après réservation";
+    const CONDITIONING_AIR = "Air conditionné";
 
-    const ANIMALS = "animals";
-    const ANIMALS_IN_CAGE = "animals in cage";
-    const NO_ANIMALS = "no animals";
-    const FREE_ANIMALS = "free animals";
-    const INDIFFERENT_ANIMALS = "indifferent for animals";
+    const ANIMALS = "Animaux";
+    const ANIMALS_IN_CAGE = "En cage seulement";
+    const NO_ANIMALS = "Pas d'animaux";
+    const FREE_ANIMALS = "Libre";
+    const INDIFFERENT_ANIMALS = "Indifferent";
 
-    const BIKE_RACK="bike rack";
-    const SKI_RACK="ski rack";
+    const BIKE_RACK="Porte-vélo";
+    const SKI_RACK="Porte-ski";
 
     //à voir pour le type de véhicule parce qu'on va pas lister tous les possibles
 
@@ -61,7 +61,7 @@ class User extends BaseUser
      * @ORM\Column(type="array", name="preference")
      */
     protected $preference=[
-        User::SMOKE_AUTHORIZED => false,
+        self::SMOKE_AUTHORIZED => false,
         self::ACCESS_PHONENUMBER => false,
         self::ACCESS_MAIL => false,
         self::CONDITIONING_AIR => false,

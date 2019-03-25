@@ -11,17 +11,17 @@
             {% if csrf_token %}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" class="form-control" />
             {% endif %}
-
-            <label for="username">{{ 'security.login.username'|trans }}</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"  class="form-control" autocomplete="username" />
-
-            <label for="password">{{ 'security.login.password'|trans }}</label>
-            <input type="password" id="password" name="_password" required="required" autocomplete="current-password" class="form-control" />
-
+            <br><br>
+            <label for="username">Nom d'utilisateur ou adresse mail</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"  class="form-control" autocomplete="username" placeholder="John Doe" />
+            <br><br>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="_password" required="required" autocomplete="current-password" class="form-control" placeholder="*******" />
+            <br>
             <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="form-control" />
+            <label for="remember_me">Se souvenir de moi</label>
+            <br><br>
+            <input type="submit" id="_submit" name="_submit" value="Connexion" class="form-control btn btn-block btn-primary" />
         </form>
     </div>
     <div class="col-md-4"></div>

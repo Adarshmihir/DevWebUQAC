@@ -3,12 +3,30 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 <div class="container-fluid row">
     <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-4"><br><br>
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-        {#{{ form_start(form, {'method': 'post', 'action': path('register'), 'attr': {'class': 'fos_user_registration_register'}}) }}#}
-        {{ form_widget(form) }}
+        {#{{ form_widget(form) }}#}
+        {{ form_errors(form) }}
+
+        {{ form_label(form.username, 'Pseudo') }}
+        <span style="font-size: 0.9vw;">(Vous pourrez vous connecter avec le pseudo et avec l'adresse mail.)</span>
+        {{ form_widget(form.username) }}
+        {{ form_errors(form.username) }}<br>
+
+        {{ form_label(form.email, 'Adresse mail') }}
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}<br>
+
+        {{ form_label(form.plainPassword.first, 'Mot de passe') }}
+        {{ form_widget(form.plainPassword.first) }}
+        {{ form_errors(form.plainPassword.first) }}<br>
+
+        {{ form_label(form.plainPassword.second, 'Confirmer le mot de passe') }}
+        {{ form_widget(form.plainPassword.second) }}<br>
+
+        {{ form_rest(form) }}
         <div>
-            <input type="submit" value="{{ 'registration.submit'|trans }}" />
+            <input type="submit" value="S'inscrire" class="btn btn-primary btn-block" />
         </div>
         {{ form_end(form) }}
     </div>

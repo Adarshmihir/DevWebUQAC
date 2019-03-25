@@ -1,5 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
+<br><br>
 <div class="fos_user_user_show container bg-light border">
     <div class="row text-center border-bottom">
         <p class="col-4 my-auto">{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
@@ -8,9 +8,13 @@
     </div>
     <ul class="list-group"><br>
         {% for key, item in user.preference %}
-            <li class="list-group-item">{{ key }} : {{ item }}
+            <li class="list-group-item">{{ key }} :
             {% if item %}
-                Oui
+                {% if key == 'Animaux' %}
+                    {{ item }}
+                {% else %}
+                    Oui
+                {% endif %}
             {% else %}
                 Non
             {% endif %}</li>
