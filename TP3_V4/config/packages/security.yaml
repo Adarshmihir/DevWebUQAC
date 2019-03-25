@@ -34,4 +34,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/newTrip, role: ROLE_USER }
         - { path: ^/saveTrip, role: ROLE_USER }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin, role: ROLE_ADMIN }

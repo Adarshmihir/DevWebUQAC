@@ -10,6 +10,12 @@
         <div class="container-fluid row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
+                {% if app.request.attributes.get('_route') == 'searchTrip' %}
+                    <a href="{{ url('searchTripFilters') }}" style="text-align: center">Plus de filtres</a>
+                {% else %}
+                    <a href="{{ url('searchTrip') }}">Moins de filtres</a>
+                {% endif %}
+                <br><br>
                 {% form_theme form 'bootstrap_4_layout.html.twig' %}
                 {{ form(form) }}
             </div>
