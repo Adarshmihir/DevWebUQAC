@@ -42,7 +42,7 @@ class DefaultController extends Controller
 
         $newTrip = new Trip();
         $form = $this->createForm(TripType::class, $newTrip)
-            ->add('Create', SubmitType::class);
+            ->add('Proposer', SubmitType::class, ['attr' => [ 'class' => 'btn btn-primary btn-block']]);
 
         $form->handleRequest($request);
 
@@ -85,13 +85,13 @@ class DefaultController extends Controller
      */
     public function searchTripAction(Request $request){
         $em = $this->getDoctrine()->getRepository(Trip::class);
-        $trips = $em->findAllOrderedByDate();
+        $trips = $em->findAllOrderedByDateSupToCurrentDate();
 
         $form = $this->createFormBuilder()
-            ->add('startPlace', TextType::class)
-            ->add('endPlace', TextType::class)
-            ->add('dateTime', DateType::class)
-            ->add('send', SubmitType::class)
+            ->add('startPlace', TextType::class, ['label' => 'Adresse de départ souhaitée'])
+            ->add('endPlace', TextType::class, ['label' => 'Adresse d\'arrivée souhaitée'])
+            ->add('dateTime', DateType::class, ['label' => 'Date de départ'])
+            ->add('Rechercher', SubmitType::class, ['attr' => ['class' => 'btn btn-primary btn-block' ]])
             ->getForm();
 
         $form->handleRequest($request);
@@ -113,21 +113,27 @@ class DefaultController extends Controller
 
             //TODO : Faire quelque chose avec ça derrière pour retourner des résultats pertinents.
 
+            $searchTrip = [];
 
+            /** @var Trip $trip */
             foreach ($trips as $trip){
-
+                if (self::distance($coordStart->lat, $coordStart->lng, $trip->getLatStart(), $trip->getLngStart(), 'k') + self::distance($coordEnd->lat, $coordEnd->lng, $trip->getLatEnding(), $trip->getLngEnding(), 'k') < 100) {
+                    $searchTrip[] = $trip;
+                }
             }
-            dump($trips);
-            dump($coordStart);
-            dump($coordEnd);
-            dump(self::distance($coordStart->lat, $coordStart->lng, $coordEnd->lat, $coordEnd->lng, 'k'));
-            dump($data);die;
+
+            return $this->render('default/searchTrip.html.twig', [
+                'trips' => $searchTrip,
+                'form' => $form->createView(),
+                'request' => 'POST'
+            ]);
         }
 
 
         return $this->render('default/searchTrip.html.twig', [
             'trips' => $trips,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'request' => 'GET'
         ]);
     }
     // Calcule la distance en entre deux points et renvoie sa valeur en kilomètre si $unit est égal à 'k'
@@ -156,7 +162,7 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         $form = $this->createForm(UserType::class)
-            ->add('Send', SubmitType::class);
+            ->add('Modifier', SubmitType::class, ['attr' => ['class' => 'btn btn-primary btn-block']]);
 
         $form->handleRequest($request);
 
@@ -254,5 +260,73 @@ class DefaultController extends Controller
             'numberPlaces' => $numberPlaces,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/myTrip", name="myTrip")
+     */
+    public function myTripAction(Request $request){
+        $user = $this->getUser();
+        $repo = $this->getDoctrine()->getManager()->getRepository(Trip::class);
+        $trips = $repo->findBy(['idDriver' => $user->getId()]);
+
+        return $this->render('default/myTrip.html.twig', [
+            'TripSave' => $user->getTripSave(),
+            'trips' => $trips
+        ]);
+    }
+
+    /**
+     * @Route("/cancelTrip/{id}/{numberPlaces}", name="cancelTrip")
+     */
+    public function cancelTripAction(Request $request, $id, $numberPlaces){
+
+        $user = $this->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(Trip::class);
+        /** @var Trip $trip */
+        $trip = $repo->find($id);
+            // Dans le cas d'un passager qui annule une réservation, le nombre de places ne sera jamais à 0.
+        if ($numberPlaces=="0") {
+            if ($trip->getNumberPlacesRemaining() != $trip->getInitialNumberPlaces()){
+                foreach ($trip->getPassengers() as $passengerTrip){
+                    $userPassenger = $this->getDoctrine()->getRepository(User::class)->find($passengerTrip['passenger']);
+                    $tripSave = $userPassenger->getTripSave();
+                    unset($tripSave[array_search([$id, $passengerTrip['numberPlaces']], $tripSave)]);
+                    $userPassenger->setTripSave($tripSave);
+                    $em->persist($userPassenger);
+                }
+            }
+            $em->remove($trip);
+        } else {
+            dump('PAS 0 places donc PASSENGER');
+            // Modification sur l'objet Trip :
+            $passengersTrip = $trip->getPassengers();
+            $passengerToCancel = [$user->getId(), $numberPlaces];
+            unset($passengersTrip[array_search($passengerToCancel, $passengersTrip)]);
+            $trip->setPassengers(array_values($passengersTrip));
+            $trip->setNumberPlacesRemaining($trip->getNumberPlacesRemaining() + $numberPlaces);
+
+            // Modification sur l'objet User :
+            $tripSave = $user->getTripSave();
+            $tripToCancel = [$id, $numberPlaces];
+            unset($tripSave[array_search($tripToCancel, $tripSave)]);
+            $user->setTripSave(array_values($tripSave));
+        }
+
+
+        $user->setCancelTrip($user->getCancelTrip()+1);
+
+        if ($user->getCancelTrip() >= 3){
+            $user->setEnabled(0);
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('fos_user_security_logout');
+        }
+
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('myTrip');
     }
 }

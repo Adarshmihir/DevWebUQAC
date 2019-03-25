@@ -12,12 +12,12 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class TripRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAllOrderedByDate()
+    public function findAllOrderedByDateSupToCurrentDate()
     {
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT trip FROM App:Trip trip
-                WHERE trip.departureTime > 2018-01-01 
+                WHERE trip.departureTime > CURRENT_DATE()+0
                 ORDER BY trip.departureTime ASC'
             )
             ->getResult();

@@ -6,7 +6,7 @@
         <p class="col-4 my-auto">{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
         <a class="btn btn-primary col-4" href="{{ url('editPrivateInfo') }}">Modifier mes informations personnelles</a>
     </div>
-    <ul class="list-group">
+    <ul class="list-group"><br>
         {% for key, item in user.preference %}
             <li class="list-group-item">{{ key }} : {{ item }}
             {% if item %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid row">
+        <div class="col-md-12"><br>
+            <h1 style="text-align: center">Mes voyages</h1>
+            <br>
+        </div>
+    </div>
+
+    <div class="container-fluid row">
+        <div class="col-md-12"><br>
+            <h2 style="text-align: center">Mes réservations</h2>
+            <br>
+        </div>
+    </div>
+
+    <div class="container-fluid row" style="text-align: center">
+        {% for trip in TripSave %}
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a href="{{ url('trip', {id: trip.idTrip}) }}">Ce voyage</a>, vous avez réservé {{ trip.numberPlaces }} places.
+                <br>
+                Un imprévu ? Vous devez annuler votre réservation ?
+                <a href="{{ url('cancelTrip', {id: trip.idTrip, numberPlaces: trip.numberPlaces}) }}">Cliquez ici</a>.
+                <h6 style="font-size: 12px">Mais vous êtes un enculé.</h6>
+            </div>
+            <div class="col-md-4"></div>
+        {% endfor %}
+    </div>
+
+    <div class="container-fluid row">
+        <div class="col-md-12"><br>
+            <h2 style="text-align: center">Mes propositions</h2>
+            <br>
+        </div>
+    </div>
+
+    <div class="container-fluid row">
+        {% for trip in trips %}
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                De {{ trip.startingPlace }} à {{ trip.endingPlace }}, le {{ trip.departureTime | date("d/m/y") }}, avec {{ trip.initialNumberPlaces }} places.
+                <br>
+                <a href="{{ url('trip', {id: trip.id}) }}">Voir le détail ici</a>
+                Vous devez annuler votre proposition ? C'est vraiment batard mais <a href="{{ url('cancelTrip', {id: trip.id, numberPlaces: 0}) }}">cliquez ici</a>
+                {#{% if trip.passengers|length > 0 %}#}
+                    {#<h1>Fait du bruit</h1>#}
+                {#{% endif %}#}
+            </div>
+            <div class="col-md-2"></div>
+        {% endfor %}
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+{% endblock %}

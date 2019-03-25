@@ -81,6 +81,27 @@ class User extends BaseUser
     protected $tripSave;
 
     /**
+     * @ORM\Column(type="integer", name="cancelTrip")
+     */
+    protected $cancelTrip=0;
+
+    /**
+     * @return mixed
+     */
+    public function getCancelTrip()
+    {
+        return $this->cancelTrip;
+    }
+
+    /**
+     * @param mixed $cancelTrip
+     */
+    public function setCancelTrip($cancelTrip): void
+    {
+        $this->cancelTrip = $cancelTrip;
+    }
+
+    /**
      * @return mixed
      */
     public function getTripSave()
