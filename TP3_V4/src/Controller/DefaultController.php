@@ -9,6 +9,8 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use mysql_xdevapi\Result;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -73,6 +75,8 @@ class DefaultController extends Controller
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Le voyage a bien été proposé.');
+
+            return $this->redirectToRoute('myTrip');
         }
 
         return $this->render('default/newTrip.html.twig', [
@@ -111,8 +115,6 @@ class DefaultController extends Controller
 
             $coordEnd = json_decode((file_get_contents(htmlspecialchars_decode($urlEnd))))->results[0]->geometry->location;
 
-            //TODO : Faire quelque chose avec ça derrière pour retourner des résultats pertinents.
-
             $searchTrip = [];
 
             /** @var Trip $trip */
@@ -136,6 +138,92 @@ class DefaultController extends Controller
             'request' => 'GET'
         ]);
     }
+
+    /**
+     * @Route("/searchTripFilters", name="searchTripFilters")
+     */
+    public function searchTripFiltersAction(Request $request){
+        $em = $this->getDoctrine()->getRepository(Trip::class);
+        $trips = $em->findAllOrderedByDateSupToCurrentDate();
+
+        $form = $this->createFormBuilder()
+            ->add('startPlace', TextType::class, ['label' => 'Adresse de départ souhaitée'])
+            ->add('endPlace', TextType::class, ['label' => 'Adresse d\'arrivée souhaitée'])
+            ->add('dateTime', DateType::class, ['label' => 'Date de départ', 'widget' => 'single_text'])
+            ->add('smoke', CheckboxType::class, ['label' => 'Fumer est autorisé ?', 'required' => false])
+            ->add('accessPhoneNumber', CheckboxType::class, ['label' => 'Accès au numéro de téléphone du conducteur après réservation ?', 'required' => false])
+            ->add('accessMail', CheckboxType::class, ['label' => 'Accès au mail du conducteur après réservation ?', 'required' => false])
+            ->add('conditionningAir', CheckboxType::class, ['label' => 'Air conditionné ?', 'required' => false])
+            ->add('animals', ChoiceType::class, [
+                'choices'  => [
+                    'Non' => User::NO_ANIMALS,
+                    'En cage' => User::ANIMALS_IN_CAGE,
+                    'Oui' => User::FREE_ANIMALS,
+                    'Indifférent' => User::INDIFFERENT_ANIMALS,
+                ],
+                'required' => true,
+                'label' => 'Animaux autorisés ?'
+            ])
+            ->add('bike', CheckboxType::class, ['label' => 'Porte-vélos présent ?', 'required' => false])
+            ->add('ski', CheckboxType::class, ['label' => 'Porte-skis présent ?', 'required' => false])
+            ->add('Rechercher', SubmitType::class, ['attr' => ['class' => 'btn btn-primary btn-block' ]])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            // Récupération des coordonnées GPS des adresse données grâce à l'API de Google Maps.
+            $urlStart = 'https://maps.googleapis.com/maps/api/geocode/json?';
+            $urlEnd = 'https://maps.googleapis.com/maps/api/geocode/json?';
+            $optionsStart = array("address"=>$data["startPlace"],"key"=>"AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA");
+            $optionsEnd = array("address"=>$data["endPlace"],"key"=>"AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA");
+            $urlStart .= http_build_query($optionsStart,'','&');
+            $urlEnd .= http_build_query($optionsEnd,'','&');
+
+            $coordStart = json_decode((file_get_contents(htmlspecialchars_decode($urlStart))))->results[0]->geometry->location;
+
+            $coordEnd = json_decode((file_get_contents(htmlspecialchars_decode($urlEnd))))->results[0]->geometry->location;
+
+
+            $searchTrip = [];
+
+            /** @var Trip $trip */
+            foreach ($trips as $trip){
+                if (self::distance($coordStart->lat, $coordStart->lng, $trip->getLatStart(), $trip->getLngStart(), 'k') + self::distance($coordEnd->lat, $coordEnd->lng, $trip->getLatEnding(), $trip->getLngEnding(), 'k') < 100) {
+                    /** @var User $driver */
+                    $driverPref = $this->getDoctrine()->getRepository()->find($trip->getIdDriver())->getPreference;
+                    if (
+                        $data["smoke"] == $driverPref[User::SMOKE_AUTHORIZED] &&
+                        $data["accessPhoneNumber"] == $driver[User::ACCESS_PHONENUMBER] &&
+                        $data["accessMail"] == $driver[User::ACCESS_MAIL] &&
+                        $data["conditionningAir"] == $driver[User::CONDITIONING_AIR] &&
+                        $data["animals"] == $driver[User::ANIMALS] &&
+                        $data["bike"] == $driver[User::BIKE_RACK] &&
+                        $data["ski"] == $driver[User::SKI_RACK]
+                    ){
+                        $searchTrip[] = $trip;
+                    }
+                }
+            }
+
+            return $this->render('default/searchTrip.html.twig', [
+                'trips' => $searchTrip,
+                'form' => $form->createView(),
+                'request' => 'POST'
+            ]);
+        }
+
+
+        return $this->render('default/searchTrip.html.twig', [
+            'trips' => $trips,
+            'form' => $form->createView(),
+            'request' => 'GET'
+        ]);
+    }
+
+
     // Calcule la distance en entre deux points et renvoie sa valeur en kilomètre si $unit est égal à 'k'
     public static function distance($lat1, $lng1, $lat2, $lng2, $unit = 'k') {
         $earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
@@ -273,6 +361,17 @@ class DefaultController extends Controller
         return $this->render('default/myTrip.html.twig', [
             'TripSave' => $user->getTripSave(),
             'trips' => $trips
+        ]);
+    }
+
+    /**
+     * @Route("/confirmCancelTrip/{id}/{numberPlaces}", name="confirmCancelTrip")
+     */
+    public function confirmCancelTripAction(Request $request, $id, $numberPlaces){
+        $trip = $this->getDoctrine()->getManager()->getRepository(Trip::class)->find($id);
+        return $this->render('default/confirmCancelTrip.html.twig', [
+            'trip' => $trip,
+            'numberPlaces' => $numberPlaces
         ]);
     }
 

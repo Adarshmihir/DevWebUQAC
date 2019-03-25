@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="container-fluid row">
+<<<<<<< HEAD
         <div class="col-md-4"></div>
         <div class="col-md-4">
             <h1 class="text-center">Rechercher un voyage</h1>
@@ -11,6 +12,26 @@
                         {% form_theme form 'bootstrap_4_layout.html.twig' %}
                         {{ form(form) }}
                 </div>
+=======
+        <div class="col-md-12"><br>
+            <h1 style="text-align: center">Rechercher un voyage</h1><br>
+        </div>
+    </div>
+    {% if request == 'GET' %}
+        <div class="container-fluid row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                {% if app.request.attributes.get('_route') == 'searchTrip' %}
+                    <a href="{{ url('searchTripFilters') }}" style="text-align: center">Plus de filtres</a>
+                {% else %}
+                    <a href="{{ url('searchTrip') }}">Moins de filtres</a>
+                {% endif %}
+                <br><br>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form(form) }}
+            </div>
+        </div>
+>>>>>>> 7627019cd9cffacab5205ca0c70a661aef15b952
 
                 {% if trips|length != 0 %}
                 <div class="form-group">

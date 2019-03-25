@@ -25,7 +25,12 @@
                 <a href="{{ url('trip', {id: trip.idTrip}) }}">Ce voyage</a>, vous avez réservé {{ trip.numberPlaces }} {% if trip.numberPlaces == 1 %} place. {% else %} places. {% endif %}
                 <br>
                 Un imprévu ? Vous devez annuler votre réservation ?
+<<<<<<< HEAD
                 <a href="{{ url('cancelTrip', {id: trip.idTrip, numberPlaces: trip.numberPlaces}) }}">Cliquez ici</a>.
+=======
+                <a href="{{ url('confirmCancelTrip', {id: trip.idTrip, numberPlaces: trip.numberPlaces}) }}">Cliquez ici</a>.
+                <h6 style="font-size: 12px">Mais vous êtes un enculé.</h6>
+>>>>>>> 7627019cd9cffacab5205ca0c70a661aef15b952
             </div>
             <div class="col-md-4"></div>
         {% endfor %}
@@ -50,7 +55,11 @@
                 De {{ trip.startingPlace }} à {{ trip.endingPlace }}, le {{ trip.departureTime | date("d/m/y") }}, avec {{ trip.initialNumberPlaces }} places.
                 <br>
                 <a href="{{ url('trip', {id: trip.id}) }}">Voir le détail ici</a>
+<<<<<<< HEAD
                 Vous devez annuler votre proposition ? <a href="{{ url('cancelTrip', {id: trip.id, numberPlaces: 0}) }}">cliquez ici</a>
+=======
+                Vous devez annuler votre proposition ? C'est vraiment batard mais <a href="{{ url('confirmCancelTrip', {id: trip.id, numberPlaces: 0}) }}">cliquez ici</a>
+>>>>>>> 7627019cd9cffacab5205ca0c70a661aef15b952
                 {#{% if trip.passengers|length > 0 %}#}
                     {#<h1>Fait du bruit</h1>#}
                 {#{% endif %}#}
