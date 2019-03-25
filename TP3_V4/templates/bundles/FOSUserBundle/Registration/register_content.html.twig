@@ -3,26 +3,29 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 <div class="container-fluid row">
     <div class="col-md-4"></div>
-    <div class="col-md-4"><br><br>
+    <div class="col-md-4">
+        <h2 class="text-center">Bienvenue chez TravelExpress</h2>
+        <h6 class="text-center">Veuillez renseigner vos informations personnelles afin de créer votre compte</h6>
+        <hr/>
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
         {#{{ form_widget(form) }}#}
         {{ form_errors(form) }}
 
         {{ form_label(form.username, 'Pseudo') }}
-        <span style="font-size: 0.9vw;">(Vous pourrez vous connecter avec le pseudo et avec l'adresse mail.)</span>
-        {{ form_widget(form.username) }}
+        <span style="font-size: 0.9vw;">(Il sera possible de vous connecter avec le pseudo ou l'adresse mail)</span>
+        {{ form_widget(form.username, {'attr' : {'placeholder' : 'John Doe'}}) }}
         {{ form_errors(form.username) }}<br>
 
         {{ form_label(form.email, 'Adresse mail') }}
-        {{ form_widget(form.email) }}
+        {{ form_widget(form.email, {'attr' : {'placeholder' : 'doe.john@example.com'}}) }}
         {{ form_errors(form.email) }}<br>
 
         {{ form_label(form.plainPassword.first, 'Mot de passe') }}
-        {{ form_widget(form.plainPassword.first) }}
+        {{ form_widget(form.plainPassword.first, {'attr' : {'placeholder' : '*******'}}) }}
         {{ form_errors(form.plainPassword.first) }}<br>
 
-        {{ form_label(form.plainPassword.second, 'Confirmer le mot de passe') }}
-        {{ form_widget(form.plainPassword.second) }}<br>
+        {{ form_label(form.plainPassword.second, 'Confirmation du mot de passe') }}
+        {{ form_widget(form.plainPassword.second, {'attr' : {'placeholder' : '*******'}}) }}<br>
 
         {{ form_rest(form) }}
         <div>

@@ -88,8 +88,8 @@ class DefaultController extends Controller
         $trips = $em->findAllOrderedByDateSupToCurrentDate();
 
         $form = $this->createFormBuilder()
-            ->add('startPlace', TextType::class, ['label' => 'Adresse de départ souhaitée'])
-            ->add('endPlace', TextType::class, ['label' => 'Adresse d\'arrivée souhaitée'])
+            ->add('startPlace', TextType::class, ['label' => 'Adresse de départ souhaitée', 'attr' => ['placeholder' => 'Entrer la ville de départ']])
+            ->add('endPlace', TextType::class, ['label' => 'Adresse d\'arrivée souhaitée', 'attr' => ['placeholder' => 'Entrer la ville d\'arrivée']])
             ->add('dateTime', DateType::class, ['label' => 'Date de départ', 'widget' => 'single_text'])
             ->add('Rechercher', SubmitType::class, ['attr' => ['class' => 'btn btn-primary btn-block' ]])
             ->getForm();
@@ -202,7 +202,7 @@ class DefaultController extends Controller
         $driver = $this->getDoctrine()->getRepository(User::class)->find($trip->getIdDriver());
 
         $form = $this->createFormBuilder()
-            ->add('numberPlaces', IntegerType::class, ['label' => 'Nombre de place (Entre 0 et ' . $trip->getInitialNumberPlaces() . ')', 'attr' => ['min' => 0, 'max' => $trip->getInitialNumberPlaces()]])
+            ->add('numberPlaces', IntegerType::class, ['label' => 'Nombre de place(s) (Entre 0 et ' . $trip->getInitialNumberPlaces() . ')', 'attr' => ['min' => 0, 'max' => $trip->getInitialNumberPlaces()]])
             ->add('Send', SubmitType::class, ['label' => 'Passer à la caisse'])
             ->getForm();
 

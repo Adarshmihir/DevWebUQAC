@@ -24,16 +24,16 @@ class TripType extends AbstractType
                 'label' => 'Date et heure du départ',
                 'widget' => 'single_text',
             ])
-            ->add('startingPlace', TextType::class, ['label' => 'Adresse de départ'])
-            ->add('endingPlace', TextType::class, ['label' => 'Adresse d\'arrivée'])
-            ->add('unitPrice', NumberType::class, ['label' => 'Prix par place'])
-            ->add('initialNumberPlaces', IntegerType::class, ['label' => 'Nombre de places disponibles'])
+            ->add('startingPlace', TextType::class, ['label' => 'Adresse de départ', 'attr' => ['placeholder' => 'Entrer la ville de départ']])
+            ->add('endingPlace', TextType::class, ['label' => 'Adresse d\'arrivée', 'attr' => ['placeholder' => 'Entrer la ville d\'arrivée']])
+            ->add('unitPrice', NumberType::class, ['label' => 'Prix par place (en $)', 'attr' => ['placeholder' => 'Entrer le prix pour chaque passager. Ex: 10']])
+            ->add('initialNumberPlaces', IntegerType::class, ['label' => 'Nombre de places disponibles', 'attr' => ['placeholder' => 'Entrer le nombre de places disponibles dans votre voiture']])
             ->add('tireType', ChoiceType::class, [
                 "choices" => [
                     "Hiver" => Trip::WINTER_TIRE,
                     "Été" => Trip::SUMMER_TIRE
                 ],
-                'label' => "Type de pneu du véhicule"
+                'label' => "Type de pneus du véhicule"
             ])
             ->add('availableSpacePerPassenger', ChoiceType::class, [
                 "choices" => [

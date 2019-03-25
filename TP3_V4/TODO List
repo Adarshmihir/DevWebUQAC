@@ -1,0 +1,24 @@
+Publication de voyage :
+	- Rajouter du feedback si validation (ou non).
+	- Ajouter option de voyage complet.
+
+Mes voyages :
+	- Ajouter frequence et heure
+
+Recherche de covoit' :
+	- Voir le detail : WTF ?!
+	- Pouvoir faire une recherche par criteres
+	- Donner les informations
+	- Acces aux coordonnes apres reservation si acces possible (check value du profil)
+	- Pourquoi pas faire un objet "publicateur" de l'annonce ?
+
+Annulation de voyage :
+	- Si un conducteur annule : Bouton qui indique la volonte d'annuler le voyage (ne pas l'annuler d'office), ne pas supprimer si un passager a reservé.
+	- Si un admin annule apres demande de conducteur : informer les passagers.
+	- Si un passager annule : notifier le conducteur et l'admin.
+
+Payer un voyage :
+	- Est ce qu'on fait le truc du coeff multiplicateur par rapport a la distance ?
+
+A corriger :
+	Affichage de TOUS les trajets quand on fait une recherche

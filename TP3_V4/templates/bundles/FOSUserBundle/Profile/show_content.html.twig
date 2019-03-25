@@ -2,13 +2,13 @@
 <br><br>
 <div class="fos_user_user_show container bg-light border">
     <div class="row text-center border-bottom">
-        <p class="col-4 my-auto">{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-        <p class="col-4 my-auto">{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+        <p class="col-4 my-auto"><span class="font-weight-bold">{{ 'profile.show.username'|trans }}</span> : {{ user.username }}</p>
+        <p class="col-4 my-auto"><span class="font-weight-bold">{{ 'profile.show.email'|trans }}</span> : {{ user.email }}</p>
         <a class="btn btn-primary col-4" href="{{ url('editPrivateInfo') }}">Modifier mes informations personnelles</a>
     </div>
     <ul class="list-group"><br>
         {% for key, item in user.preference %}
-            <li class="list-group-item">{{ key }} :
+            <li class="list-group-item"><span class="font-weight-bold">{{ key }}</span> :
             {% if item %}
                 {% if key == 'Animaux' %}
                     {{ item }}

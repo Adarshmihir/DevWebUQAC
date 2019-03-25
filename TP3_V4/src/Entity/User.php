@@ -23,8 +23,8 @@ class User extends BaseUser
     const BOTH_TYPE = "Driver or Passenger";
 
     const SMOKE_AUTHORIZED = "Fumeur autorisé dans la voiture";
-    const ACCESS_PHONENUMBER = "Accés au numéro de téléphone après réservation";
-    const ACCESS_MAIL = "Accés au mail après réservation";
+    const ACCESS_PHONENUMBER = "Accès au numéro de téléphone après réservation";
+    const ACCESS_MAIL = "Accès au mail après réservation";
     const CONDITIONING_AIR = "Air conditionné";
 
     const ANIMALS = "Animaux";
