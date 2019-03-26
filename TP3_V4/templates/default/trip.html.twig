@@ -11,8 +11,10 @@
     <div class="container-fluid row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
+            {% if trip.numberPlacesRemaining > 0 %}
             {% form_theme form 'bootstrap_4_layout.html.twig' %}
             {{ form(form) }}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

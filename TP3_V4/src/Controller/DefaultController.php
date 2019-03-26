@@ -50,7 +50,6 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
-            $newTrip->setUnitPricePlusFees($newTrip->getUnitPrice()); //TODO : Une fois qu'on aura la distance, calculer ça.
             $newTrip->setNumberPlacesRemaining($newTrip->getInitialNumberPlaces());
             $newTrip->setIdDriver($user->getId());
 
@@ -70,6 +69,9 @@ class DefaultController extends Controller
             $coordEnd = json_decode((file_get_contents(htmlspecialchars_decode($urlEnd))))->results[0]->geometry->location;
             $newTrip->setLatEnding($coordEnd->lat);
             $newTrip->setLngEnding($coordEnd->lng);
+
+            $newTrip->setUnitPricePlusFees($newTrip->getUnitPrice()+round(self::distance($coordStart->lat, $coordStart->lng, $coordEnd->lat, $coordEnd->lng)/100, 2));
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($newTrip);
@@ -318,7 +320,7 @@ class DefaultController extends Controller
         $driver = $this->getDoctrine()->getRepository(User::class)->find($trip->getIdDriver());
 
         $form = $this->createFormBuilder()
-            ->add('numberPlaces', IntegerType::class, ['label' => 'Nombre de place(s) (Entre 0 et ' . $trip->getInitialNumberPlaces() . ')', 'attr' => ['min' => 0, 'max' => $trip->getInitialNumberPlaces()]])
+            ->add('numberPlaces', IntegerType::class, ['label' => 'Nombre de place(s) (Entre 1 et ' . $trip->getNumberPlacesRemaining() . ')', 'attr' => ['min' => 1, 'max' => $trip->getInitialNumberPlaces()]])
             ->add('Send', SubmitType::class, ['label' => 'Passer à la caisse'])
             ->getForm();
 
@@ -358,7 +360,7 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user->addTripSave(["idTrip" => $idTrip, "numberPlaces" => $numberPlaces]);
             $trip->addPassengers(["passenger" => $user->getId(), "numberPlaces" => $numberPlaces]);
-            $trip->setNumberPlacesRemaining($trip->getInitialNumberPlaces()-$numberPlaces);
+            $trip->setNumberPlacesRemaining($trip->getNumberPlacesRemaining()-$numberPlaces);
 
             $em = $this->getDoctrine()->getManager();
 
