@@ -431,7 +431,7 @@ class DefaultController extends Controller
     /**
      * @Route("/cancelTrip/{id}/{numberPlaces}", name="cancelTrip")
      */
-    public function cancelTripAction(Request $request, $id, $numberPlaces){
+    public function cancelTripAction(Request $request, $id, $numberPlaces, \Swift_Mailer $mailer){
 
         $user = $this->getUser();
         $em=$this->getDoctrine()->getManager();
@@ -443,6 +443,16 @@ class DefaultController extends Controller
             if ($trip->getNumberPlacesRemaining() != $trip->getInitialNumberPlaces()){
                 foreach ($trip->getPassengers() as $passengerTrip){
                     $userPassenger = $this->getDoctrine()->getRepository(User::class)->find($passengerTrip['passenger']);
+
+                    // Envoi d'un mail pour prévenir les passagers.
+                    $message = (new \Swift_Message('Annulation du voyage ' . $trip->getStartingPlace() . " - " . $trip->getEndingPlace()))
+                        ->setFrom('TravelExpress@uqac.ca')
+                        ->setTo($userPassenger->getEmail())
+                        ->setBody('Nous avons le regret de vous annoncer que le conducteur du voyage ' . $trip->getStartingPlace() . " - " . $trip->getEndingPlace() . ' a malheureusement dû annuler le voyage. Aller salut !');
+
+                    $mailer->send($message);
+
+
                     $tripSave = $userPassenger->getTripSave();
                     unset($tripSave[array_search([$id, $passengerTrip['numberPlaces']], $tripSave)]);
                     $userPassenger->setTripSave($tripSave);
@@ -451,13 +461,21 @@ class DefaultController extends Controller
             }
             $em->remove($trip);
         } else {
-            dump('PAS 0 places donc PASSENGER');
             // Modification sur l'objet Trip :
             $passengersTrip = $trip->getPassengers();
             $passengerToCancel = [$user->getId(), $numberPlaces];
             unset($passengersTrip[array_search($passengerToCancel, $passengersTrip)]);
             $trip->setPassengers(array_values($passengersTrip));
             $trip->setNumberPlacesRemaining($trip->getNumberPlacesRemaining() + $numberPlaces);
+
+            $message = (new \Swift_Message('Annulation du voyage ' . $trip->getStartingPlace() . " - " . $trip->getEndingPlace()))
+                ->setFrom('TravelExpress@uqac.ca')
+                ->setTo($this->getDoctrine()->getRepository(User::class)->find($trip->getIdDriver())->getEmail())
+                ->setBody('Nous avons le regret de vous annoncer que le passager du voyage ' . $trip->getStartingPlace() . " - " . $trip->getEndingPlace() . ' a malheureusement dû annuler le voyage.
+                 Il avait réservé '. $numberPlaces .' places qui sont à nouveaux disponibles sur la plateforme. Aller salut !');
+
+            $mailer->send($message);
+
 
             // Modification sur l'objet User :
             $tripSave = $user->getTripSave();
