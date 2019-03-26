@@ -1,20 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <div class="container-fluid row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
+{% block body %}<br><br>
+    <h1 style="text-align: center">{{ trip.startingPlace }} - {{ trip.endingPlace }} : le {{ trip.departureTime|date('d/m/y') }} à {{ trip.departureTime|date('h:m') }}</h1>
+    <br><br><br>
+    <div class="container-fluid row" style="margin-bottom: 5%;">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <div id="map" style="height: 100%;"></div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <h2>Informations générales sur le voyage et le véhicule</h2> <br>
+            <b>Prix unitaire : </b> {{ trip.unitPricePlusFees }} $ CAD <br>
+            <b>Nombre de place(s) restante(s) : </b> {{ trip.numberPlacesRemaining }} <br>
+            <b>Type de pneus : </b> {{ trip.tireType }} <br>
+            <b>Espace disponible par passager : </b> {{ trip.availableSpacePerPassenger }} <br>
+            <b>Air conditionné : </b> {% if driver.preference["Air conditionné"] %} Disponible {% else %} Non disponible {% endif %}
+
+            <br><br>
+
+            <h2>Préférences du conducteur</h2><br>
+            <b>Fumeur : </b> {% if driver.preference["Fumeur autorisé dans la voiture"] %} Autorisé dans la voiture {% else %} Pas dans la voiture {% endif %} <br>
+            <b>Animaux : </b> {{ driver.preference["Animaux"] }} <br>
+            <b>Porte-vélo : </b> {% if driver.preference["Porte-vélo"] %} Présent sur le véhicule {% else %} Absent {% endif %} <br>
+            <b>Porte-ski : </b> {% if driver.preference["Porte-ski"] %} Présent sur le véhicule {% else %} Absent {% endif %} <br>
+
+            <br><br>
+            <h2>Accès aux coordonnées du conducteur</h2><br>
+            <b>Adresse mail : </b> {% if driver.preference["Accès au mail après réservation"] %} Disponible après réservation {% else %} Non disponible {% endif %} <br>
+            <b>Numéro de téléphone : </b> {% if driver.preference["Accès au numéro de téléphone après réservation"] %} Disponible après réservation {% else %} Non disponible {% endif %}
+        </div>
     </div>
-    {{ dump(trip) }}
-    {{ dump(driver) }}
 
     <div class="container-fluid row">
-        <div class="col-md-4"></div>
         <div class="col-md-4">
+        </div>
+        <div class="col-md-4" style="text-align: center">
             {% if trip.numberPlacesRemaining > 0 %}
-            {% form_theme form 'bootstrap_4_layout.html.twig' %}
-            {{ form(form) }}
+                <h2>Réserver vos places</h2>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form(form) }}
             {% endif %}
         </div>
     </div>
+
+    <script>
+        var map;
+        function initMap() {
+            // Création de la carte.
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: {{ trip.latStart }}, lng: {{ trip.lngStart}} },
+                zoom: 5
+            });
+
+            // Marqueur pour le point de départ
+            var infowindow = new google.maps.InfoWindow({
+                content: "Départ"
+            });
+            var marker = new google.maps.Marker({
+                position: {lat: {{ trip.latStart }}, lng: {{ trip.lngStart}} },
+                map: map,
+                title: 'Point de départ'
+            });
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+
+
+
+            // Marqueur pour le point d'arrivée
+            var infowindowEnd = new google.maps.InfoWindow({
+                content: "Arrivée"
+            });
+            var markerEnd = new google.maps.Marker({
+                position: {lat: {{ trip.latEnding }}, lng: {{ trip.lngEnding }} },
+                map: map,
+                title: 'Point d\'arrivée'
+            });
+            markerEnd.addListener('click', function() {
+                infowindowEnd.open(map, markerEnd);
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBk5VQ6Stqy4h02d6TvvBoT3KefsYZp1lA&callback=initMap"
+            async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 {% endblock %}

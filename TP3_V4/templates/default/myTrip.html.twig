@@ -20,8 +20,7 @@
 
     <div class="container-fluid row" style="text-align: center">
         {% for trip in TripSave %}
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-3 border" style="margin-left: 4.1%; margin-right: 4.1%; margin-bottom: 4.1%; padding: 1%;">
                 <a href="{{ url('trip', {id: trip.idTrip}) }}">Ce voyage</a>, vous avez réservé {{ trip.numberPlaces }} {% if trip.numberPlaces == 1 %} place. {% else %} places. {% endif %}
                 <br>
                 {{ render(controller(
@@ -31,7 +30,6 @@
                 Un imprévu ? Vous devez annuler votre réservation ?
                 <a href="{{ url('confirmCancelTrip', {id: trip.idTrip, numberPlaces: trip.numberPlaces}) }}">Cliquez ici</a>.
             </div>
-            <div class="col-md-4"></div>
         {% endfor %}
     </div>
 
@@ -49,14 +47,12 @@
 
     <div class="container-fluid row">
         {% for trip in trips %}
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+            <div class="col-md-3 border" style="margin: 0 4.1% 4.1% 4.1%; text-align: center; padding: 1%;">
                 De {{ trip.startingPlace }} à {{ trip.endingPlace }}, le {{ trip.departureTime | date("d/m/y") }}, avec {{ trip.initialNumberPlaces }} places.
                 <br>
-                <a href="{{ url('trip', {id: trip.id}) }}">Voir le détail ici</a>
+                <a href="{{ url('trip', {id: trip.id}) }}">Voir le détail ici</a><br>
                 Vous devez annuler votre proposition ? <a href="{{ url('confirmCancelTrip', {id: trip.id, numberPlaces: 0}) }}">cliquez ici</a>
             </div>
-            <div class="col-md-2"></div>
         {% endfor %}
     </div>
 

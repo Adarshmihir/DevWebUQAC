@@ -352,7 +352,7 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         $form = $this->createFormBuilder()
-            ->add('Send', SubmitType::class, ['label' => 'Payer (on suppose qu\'on a un vrai moyen de paiement.)'])
+            ->add('Send', SubmitType::class, ['label' => 'Payer'])
             ->getForm();
 
         $form->handleRequest($request);
