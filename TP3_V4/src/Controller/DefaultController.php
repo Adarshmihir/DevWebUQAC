@@ -150,10 +150,10 @@ class DefaultController extends Controller
             ->add('startPlace', TextType::class, ['label' => 'Adresse de départ souhaitée'])
             ->add('endPlace', TextType::class, ['label' => 'Adresse d\'arrivée souhaitée'])
             ->add('dateTime', DateType::class, ['label' => 'Date de départ', 'widget' => 'single_text'])
-            ->add('smoke', CheckboxType::class, ['label' => 'Fumer est autorisé ?', 'required' => false])
-            ->add('accessPhoneNumber', CheckboxType::class, ['label' => 'Accès au numéro de téléphone du conducteur après réservation ?', 'required' => false])
-            ->add('accessMail', CheckboxType::class, ['label' => 'Accès au mail du conducteur après réservation ?', 'required' => false])
-            ->add('conditionningAir', CheckboxType::class, ['label' => 'Air conditionné ?', 'required' => false])
+            ->add('smoke', CheckboxType::class, ['label' => 'Autorisation de fumer dans la voiture', 'required' => false])
+            ->add('accessPhoneNumber', CheckboxType::class, ['label' => 'Accès au numéro de téléphone du conducteur après réservation', 'required' => false])
+            ->add('accessMail', CheckboxType::class, ['label' => 'Accès au mail du conducteur après réservation', 'required' => false])
+            ->add('conditionningAir', CheckboxType::class, ['label' => 'Air conditionné', 'required' => false])
             ->add('animals', ChoiceType::class, [
                 'choices'  => [
                     'Non' => User::NO_ANIMALS,
@@ -162,10 +162,27 @@ class DefaultController extends Controller
                     'Indifférent' => User::INDIFFERENT_ANIMALS,
                 ],
                 'required' => true,
-                'label' => 'Animaux autorisés ?'
+                'label' => 'Animaux autorisés'
             ])
-            ->add('bike', CheckboxType::class, ['label' => 'Porte-vélos présent ?', 'required' => false])
-            ->add('ski', CheckboxType::class, ['label' => 'Porte-skis présent ?', 'required' => false])
+            ->add('bike', CheckboxType::class, ['label' => 'Porte-vélos présent', 'required' => false])
+            ->add('ski', CheckboxType::class, ['label' => 'Porte-skis présent', 'required' => false])
+            ->add('tire', ChoiceType::class, [
+                'choices' => [
+                    'Hiver' => Trip::WINTER_TIRE,
+                    'Été' => Trip::SUMMER_TIRE,
+                    'Indifférent' => User::INDIFFERENT_ANIMALS
+                ],
+                'required' => true,
+                'label' => 'Type de pneu du véhicule'
+            ])
+            ->add('spaceForPassenger', ChoiceType::class, [
+                'choices' => [
+                    'Valise' => Trip::SUITCASE,
+                    'Sac à dos' => Trip::BACKPACK,
+                    'Petit sac' => Trip::SMALLBAG
+                ],
+                'label' => 'Espace disponible par passager'
+            ])
             ->add('Rechercher', SubmitType::class, ['attr' => ['class' => 'btn btn-primary btn-block' ]])
             ->getForm();
 
@@ -194,16 +211,26 @@ class DefaultController extends Controller
                 if (self::distance($coordStart->lat, $coordStart->lng, $trip->getLatStart(), $trip->getLngStart(), 'k') + self::distance($coordEnd->lat, $coordEnd->lng, $trip->getLatEnding(), $trip->getLngEnding(), 'k') < 100) {
                     /** @var User $driver */
                     $driverPref = $this->getDoctrine()->getRepository()->find($trip->getIdDriver())->getPreference;
+                    // On vérifie ici que les filtres s'appliquent bien.
                     if (
                         $data["smoke"] == $driverPref[User::SMOKE_AUTHORIZED] &&
-                        $data["accessPhoneNumber"] == $driver[User::ACCESS_PHONENUMBER] &&
-                        $data["accessMail"] == $driver[User::ACCESS_MAIL] &&
                         $data["conditionningAir"] == $driver[User::CONDITIONING_AIR] &&
-                        $data["animals"] == $driver[User::ANIMALS] &&
-                        $data["bike"] == $driver[User::BIKE_RACK] &&
-                        $data["ski"] == $driver[User::SKI_RACK]
+                        ($data["animals"] == $driver[User::ANIMALS] || $data["animals"] == User::INDIFFERENT_ANIMALS) &&
+                        ($data["bike"] == $driver[User::BIKE_RACK] || (!$data["bike"])) &&
+                        ($data["ski"] == $driver[User::SKI_RACK] || (!$data["ski"]))
                     ){
-                        $searchTrip[] = $trip;
+                        if(
+                        ($data["accessPhoneNumber"] == $driver[User::ACCESS_PHONENUMBER] || (!$data["accessPhoneNumber"])) &&
+                        ($data["accessMail"] == $driver[User::ACCESS_MAIL] || (!$data["accessMail"]) )){
+                            if ($data["tire"] == $trip->getTireType() || $data["tire"] == User::INDIFFERENT_ANIMALS){
+                                if ( ($data["spaceForPassenger"] == $trip->getAvailableSpacePerPassenger())
+                                    || ($data["spaceForPassenger"] == Trip::SMALLBAG)
+                                    || ($data["spaceForPassenger"] == Trip::BACKPACK && ($trip->getAvailableSpacePerPassenger() == Trip::SUITCASE))
+                                ){
+                                    $searchTrip[] = $trip;
+                                }
+                            }
+                        }
                     }
                 }
             }
