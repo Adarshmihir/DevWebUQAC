@@ -38,14 +38,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../templates/default/searchTrip.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+            <state relative-caret-position="330">
+              <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
               <folding>
-                <element signature="e#427#453#0#HTML" expanded="true" />
+                <element signature="e#141#167#0#HTML" expanded="true" />
+                <element signature="e#511#537#0#HTML" expanded="true" />
+                <element signature="e#1568#1635#0#HTML" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../templates/default/myTrip.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -60,6 +71,7 @@
       <find>phoneNumber</find>
       <find>cancel</find>
       <find>flash</find>
+      <find>HEAD</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/config</dir>
@@ -98,13 +110,13 @@
         <option value="$PROJECT_DIR$/../templates/bundles/FOSUserBundle/Profile/show_content.html.twig" />
         <option value="$PROJECT_DIR$/../src/Form/TripType.php" />
         <option value="$PROJECT_DIR$/../templates/default/confirmCancelTrip.html.twig" />
-        <option value="$PROJECT_DIR$/../templates/default/myTrip.html.twig" />
         <option value="$PROJECT_DIR$/../config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/../templates/base.html.twig" />
         <option value="$PROJECT_DIR$/../src/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/../templates/admin/index.html.twig" />
         <option value="$PROJECT_DIR$/../src/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/../templates/default/searchTrip.html.twig" />
+        <option value="$PROJECT_DIR$/../templates/default/myTrip.html.twig" />
       </list>
     </option>
   </component>
@@ -302,12 +314,12 @@
       <updated>1553302427645</updated>
       <workItem from="1553302430842" duration="2099000" />
       <workItem from="1553462030900" duration="19843000" />
-      <workItem from="1553545361601" duration="5980000" />
+      <workItem from="1553545361601" duration="6922000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27922000" />
+    <option name="totallyTimeSpent" value="28864000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -322,7 +334,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19811843" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19811843" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -335,7 +347,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32937366" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -495,13 +507,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../templates/default/myTrip.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="56" column="31" lean-forward="true" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../templates/default/confirmCancelTrip.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -574,11 +579,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../templates/default/searchTrip.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+        <state relative-caret-position="330">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
           <folding>
-            <element signature="e#427#453#0#HTML" expanded="true" />
+            <element signature="e#141#167#0#HTML" expanded="true" />
+            <element signature="e#511#537#0#HTML" expanded="true" />
+            <element signature="e#1568#1635#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../templates/default/myTrip.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="49" column="32" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
         </state>
       </provider>
     </entry>
