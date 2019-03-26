@@ -24,9 +24,12 @@
             <div class="col-md-4">
                 <a href="{{ url('trip', {id: trip.idTrip}) }}">Ce voyage</a>, vous avez réservé {{ trip.numberPlaces }} {% if trip.numberPlaces == 1 %} place. {% else %} places. {% endif %}
                 <br>
+                {{ render(controller(
+                    'App\\Controller\\DefaultController::getUserAction',
+                    { 'id': trip.idTrip}
+                )) }}<br>
                 Un imprévu ? Vous devez annuler votre réservation ?
                 <a href="{{ url('confirmCancelTrip', {id: trip.idTrip, numberPlaces: trip.numberPlaces}) }}">Cliquez ici</a>.
-                <h6 style="font-size: 12px">Mais vous êtes un enculé.</h6>
             </div>
             <div class="col-md-4"></div>
         {% endfor %}

@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
@@ -387,8 +388,31 @@ class DefaultController extends Controller
 
         return $this->render('default/myTrip.html.twig', [
             'TripSave' => $user->getTripSave(),
-            'trips' => $trips
+            'trips' => $trips,
         ]);
+    }
+
+    /**
+     * @Route("/getUser/{id}", name="getUser")
+     */
+    public function getUserAction(Request $request, $id){
+        /** @var User $user */
+        $user = $this->getDoctrine()->getRepository(User::class)->find($this->getDoctrine()->getRepository(Trip::class)->find($id)->getIdDriver());
+        $mail = $user->getPreference()[User::ACCESS_MAIL];
+        $phone = $user->getPreference()[User::ACCESS_PHONENUMBER];
+
+        if ($mail && $phone){
+            $data = "<b>Téléphone : </b>" . $user->getPhoneNumber() . ", <b>Email : </b>" . $user->getEmail();
+        } else if ($mail && !$phone){
+            $data = "<b>Email : </b>" . $user->getEmail() . ". Le conducteur n'a pas fourni son numéro de téléphone.";
+        } else if (!$mail && $phone){
+            $data = "<b>Téléphone : </b>" . $user->getPhoneNumber() . ". Le conducteur n'a pas fourni son adresse mail.";
+        } else {
+            $data = "Le conducteur n'a fourni aucune de ses coordonnées.";
+        }
+
+        $user = new Response($data);
+        return $user;
     }
 
     /**
