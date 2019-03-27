@@ -212,19 +212,18 @@ class DefaultController extends Controller
             /** @var Trip $trip */
             foreach ($trips as $trip){
                 if (self::distance($coordStart->lat, $coordStart->lng, $trip->getLatStart(), $trip->getLngStart(), 'k') + self::distance($coordEnd->lat, $coordEnd->lng, $trip->getLatEnding(), $trip->getLngEnding(), 'k') < 100) {
-                    /** @var User $driver */
-                    $driverPref = $this->getDoctrine()->getRepository()->find($trip->getIdDriver())->getPreference;
+                    $driverPref = $this->getDoctrine()->getRepository(User::class)->find($trip->getIdDriver())->getPreference();
                     // On vérifie ici que les filtres s'appliquent bien.
                     if (
                         $data["smoke"] == $driverPref[User::SMOKE_AUTHORIZED] &&
-                        $data["conditionningAir"] == $driver[User::CONDITIONING_AIR] &&
-                        ($data["animals"] == $driver[User::ANIMALS] || $data["animals"] == User::INDIFFERENT_ANIMALS) &&
-                        ($data["bike"] == $driver[User::BIKE_RACK] || (!$data["bike"])) &&
-                        ($data["ski"] == $driver[User::SKI_RACK] || (!$data["ski"]))
+                        $data["conditionningAir"] == $driverPref[User::CONDITIONING_AIR] &&
+                        ($data["animals"] == $driverPref[User::ANIMALS] || $data["animals"] == User::INDIFFERENT_ANIMALS) &&
+                        ($data["bike"] == $driverPref[User::BIKE_RACK] || (!$data["bike"])) &&
+                        ($data["ski"] == $driverPref[User::SKI_RACK] || (!$data["ski"]))
                     ){
                         if(
-                        ($data["accessPhoneNumber"] == $driver[User::ACCESS_PHONENUMBER] || (!$data["accessPhoneNumber"])) &&
-                        ($data["accessMail"] == $driver[User::ACCESS_MAIL] || (!$data["accessMail"]) )){
+                        ($data["accessPhoneNumber"] == $driverPref[User::ACCESS_PHONENUMBER] || (!$data["accessPhoneNumber"])) &&
+                        ($data["accessMail"] == $driverPref[User::ACCESS_MAIL] || (!$data["accessMail"]) )){
                             if ($data["tire"] == $trip->getTireType() || $data["tire"] == User::INDIFFERENT_ANIMALS){
                                 if ( ($data["spaceForPassenger"] == $trip->getAvailableSpacePerPassenger())
                                     || ($data["spaceForPassenger"] == Trip::SMALLBAG)
