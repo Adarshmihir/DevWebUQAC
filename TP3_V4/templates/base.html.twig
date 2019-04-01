@@ -50,20 +50,22 @@
         </div>
     </nav>
     {% endblock %}
-        {% block body %}
-            {% for type, messages in app.session.flashbag.all() %}
-                <br><br>
-                {% for message in messages %}
-                    <div class="row container-fluid" >
-                        <div class="col-md-2"></div>
-                        <div class="center alert alert-{{ type }} col-md-2">
-                            {{ message }}
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endfor %}
+    {% block body %}
 
-        {% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% for type, messages in app.session.flashbag.all() %}
+            <br><br><br><br><br>
+            {% for message in messages %}
+                <div class="row container-fluid" >
+                    <div class="col-md-2"></div>
+                    <div class="center alert alert-{{ type }} col-md-4">
+                        {{ message |raw }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+    {% endblock %}
+    {% block javascripts %}{% endblock %}
     </body>
 </html>

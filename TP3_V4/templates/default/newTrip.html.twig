@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
-<div class="container-fluid row">
+    {{ parent() }}
+    <div class="container-fluid row">
     <div class="col-md-12"><br>
         <h1 style="text-align: center">Proposer un voyage</h1>
         <br>

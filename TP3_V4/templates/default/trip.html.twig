@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}<br><br>
+    {{ parent() }}
     <h1 style="text-align: center">{{ trip.startingPlace }} - {{ trip.endingPlace }} : le {{ trip.departureTime|date('d/m/y') }} à {{ trip.departureTime|date('h:m') }}</h1>
     <br><br><br>
     <div class="container-fluid row" style="margin-bottom: 5%;">
