@@ -1,6 +1,0 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
-
-fos_uer:
-    resource: '@FOSUserBundle/Resources/config/routing/all.xml'

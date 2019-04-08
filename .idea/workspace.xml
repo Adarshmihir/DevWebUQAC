@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="90bc10a7-3b7b-49e4-ade4-c79cb6634966" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/TP3/composer.json</pharConfigPath>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TP3/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/TP3/vendor/php-http/message-factory" />
+      <path value="$PROJECT_DIR$/TP3/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/TP3/vendor/kriswallsmith/buzz" />
+      <path value="$PROJECT_DIR$/TP3/vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/TP3/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/TP3/vendor/gremo/buzz-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/nyholm/psr7" />
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/TP3/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/TP3/vendor/friendsofsymfony/user-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/symfony" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/doctrine-cache-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/TP3/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/TP3/vendor/sensiolabs/security-checker" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/polyfill-apcu" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/TP3/vendor/jdorn/sql-formatter" />
+      <path value="$PROJECT_DIR$/TP3/vendor/sensio/distribution-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/sensio/generator-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/composer" />
+      <path value="$PROJECT_DIR$/TP3/vendor/symfony/templating" />
+      <path value="$PROJECT_DIR$/TP3/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/TP3/vendor/giggsey/locale" />
+      <path value="$PROJECT_DIR$/TP3/vendor/incenteev/composer-parameter-handler" />
+      <path value="$PROJECT_DIR$/TP3/vendor/giggsey/libphonenumber-for-php" />
+      <path value="$PROJECT_DIR$/TP3/vendor/misd/phone-number-bundle" />
+      <path value="$PROJECT_DIR$/TP3/vendor/fig/link-util" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/TP3/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/TP3/vendor/psr/log" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="471" />
+    <option name="y" value="27" />
+    <option name="width" value="1449" />
+    <option name="height" value="1053" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DevWebUQAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DevWebUQAC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DevWebUQAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DevWebUQAC" type="462c0819:PsiDirectoryNode" />
+              <item name="TP3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DevWebUQAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DevWebUQAC" type="462c0819:PsiDirectoryNode" />
+              <item name="TP3" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DevWebUQAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DevWebUQAC" type="462c0819:PsiDirectoryNode" />
+              <item name="TP3" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DevWebUQAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DevWebUQAC" type="462c0819:PsiDirectoryNode" />
+              <item name="TP3" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DevWebUQAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DevWebUQAC" type="462c0819:PsiDirectoryNode" />
+              <item name="TP3" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DevWebUQAC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DevWebUQAC" type="462c0819:PsiDirectoryNode" />
+              <item name="TP3" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90bc10a7-3b7b-49e4-ade4-c79cb6634966" name="Default Changelist" comment="" />
+      <created>1553277428308</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553277428308</updated>
+      <workItem from="1553277437337" duration="3302000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3302000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="67" y="25" width="1853" height="1055" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24958494" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/TP3/app/Resources/views/default/newTrip.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="80" selection-start-line="18" selection-start-column="80" selection-end-line="18" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TP3/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
