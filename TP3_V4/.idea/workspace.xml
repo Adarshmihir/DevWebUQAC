@@ -5,25 +5,7 @@
       <change beforePath="$PROJECT_DIR$/../TP3/.idea/TP3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../TP3/.idea/TP3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TP3/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TP3/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TP3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TP3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TP3_V4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TP3_V4.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/cancelTrip.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/cancelTrip.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/confirmCancelTrip.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/confirmCancelTrip.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/editPrivateInfo.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/editPrivateInfo.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/myTrip.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/myTrip.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/newTrip.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/newTrip.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/saveTrip.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/saveTrip.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/searchTrip.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/searchTrip.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/trip.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/trip.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,11 +18,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="565" column="89" selection-start-line="565" selection-start-column="89" selection-end-line="565" selection-end-column="89" />
+            <state relative-caret-position="315">
+              <caret line="458" selection-start-line="458" selection-end-line="458" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/default/newTrip.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="101" lean-forward="true" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="101" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Trip.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="132" column="35" selection-start-line="132" selection-start-column="25" selection-end-line="132" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/packages/fos_user.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -78,7 +87,6 @@
         <option value="$PROJECT_DIR$/src/Form/RegistrationType.php" />
         <option value="$PROJECT_DIR$/src/Repository/TripRepository.php" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/src/Entity/Trip.php" />
         <option value="$PROJECT_DIR$/src/Form/TripType.php" />
         <option value="$PROJECT_DIR$/src/Form/UserType.php" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
@@ -123,6 +131,7 @@
         <option value="$PROJECT_DIR$/templates/default/cancelTrip.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Trip.php" />
         <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
       </list>
     </option>
@@ -240,6 +249,12 @@
             <path>
               <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
               <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -251,7 +266,37 @@
             <path>
               <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
               <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Repository" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TP3_V4" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="bundles" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TP3_V4" type="b2602c69:ProjectViewProjectNode" />
@@ -312,12 +357,12 @@
       <workItem from="1553545361601" duration="10732000" />
       <workItem from="1553621191990" duration="10826000" />
       <workItem from="1553649598648" duration="681000" />
-      <workItem from="1554158847178" duration="3616000" />
+      <workItem from="1554158847178" duration="9946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47797000" />
+    <option name="totallyTimeSpent" value="54127000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -330,9 +375,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20475927" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20475927" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -345,7 +389,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.29697624" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.31317493" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -357,8 +401,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../templates/bundles/FOSUserBundle/layout.html.twig" />
-    <entry file="file://$PROJECT_DIR$/../config/bundles.php" />
     <entry file="file://$PROJECT_DIR$/../templates/default/index.html.twig" />
     <entry file="file://$PROJECT_DIR$/../src/Controller/.gitignore" />
     <entry file="file://$PROJECT_DIR$/../src/Services/TripManager.php" />
@@ -427,13 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/default/newTrip.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -483,10 +518,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Trip.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="132" column="35" selection-start-line="132" selection-start-column="25" selection-end-line="132" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/fos_user.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="565" column="89" selection-start-line="565" selection-start-column="89" selection-end-line="565" selection-end-column="89" />
+        <state relative-caret-position="315">
+          <caret line="458" selection-start-line="458" selection-end-line="458" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/default/newTrip.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="101" lean-forward="true" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="101" />
         </state>
       </provider>
     </entry>
